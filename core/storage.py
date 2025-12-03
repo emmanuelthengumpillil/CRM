@@ -26,3 +26,14 @@ def append_csv(file, row_dict):
         return 404
     except TypeError:
         return 400
+
+def write_csv(file, row_dict):
+    header = read_csv(file)[2]
+    with open(file, "w", newline='') as write_file:
+        writer = csv.DictWriter(write_file, fieldnames=header)
+        writer.writeheader()
+        writer.writerow(row_dict)
+        return 200
+    # here FILE NOT FOUND Wont happen as "w" creates new one
+
+print(write_csv(f,l))
