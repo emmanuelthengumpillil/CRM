@@ -35,5 +35,3 @@ def write_csv(file, row_dict):
         writer.writerow(row_dict)
         return 200
     # here FILE NOT FOUND Wont happen as "w" creates new one
-
-print(write_csv(f,l))
