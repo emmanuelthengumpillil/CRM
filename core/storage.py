@@ -9,29 +9,35 @@ def read_csv(file):
         with open(file,'r',newline='') as reading_file:
             reader = csv.DictReader(reading_file)
             header = reader.fieldnames
-            for row in reader:
-                crm_list.append(row)
+            if header != None:
+                for row in reader:
+                    crm_list.append(row)
             return 200, crm_list, header
     except FileNotFoundError:
         return 404, None, None
 
-def append_csv(file, row_dict):
+
+def write_csv(file, rows):
+    crm = read_csv(file)[1]
+    header = read_csv(file)[2]
     try:
-        header = read_csv(file)[2]
         with open(file,"a",newline = '') as append_file:
             writer = csv.DictWriter(append_file, fieldnames=header)
-            writer.writerow(row_dict)
-            return 200
+            writer.writerow(rows)
+            return 200, crm, None
     except FileNotFoundError:
-        return 404
-    except TypeError:
-        return 400
+        return 404, None, None
 
-def write_csv(file, row_dict):
+
+def rewrite_csv(file,list_of_rows):
+    crm = read_csv(file)[1]
     header = read_csv(file)[2]
+    # As write will anyway create a new file File not fpund error is excluded
     with open(file, "w", newline='') as write_file:
         writer = csv.DictWriter(write_file, fieldnames=header)
         writer.writeheader()
-        writer.writerow(row_dict)
-        return 200
-    # here FILE NOT FOUND Wont happen as "w" creates new one
+        for row in crm:
+            writer.writerow(row)
+        return 200, list_of_rows, None
+
+
