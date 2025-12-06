@@ -48,6 +48,6 @@ def valid_name(name):
 
 def valid_phone(phone):
     if str(phone).isdigit and not "":
-        if 10 <= len(str) <= 12:
+        if 10 <= len(phone) <= 12:
             return 200, True, phone
     return 405, False, None
