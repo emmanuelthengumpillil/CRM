@@ -41,3 +41,8 @@ def rewrite_csv(file,list_of_rows):
         return 200, list_of_rows, None
 
 
+def get_next_id(file):
+    crm  = read_csv(file)[1]
+    id_index = int(crm[-1]["ID"])
+    return id_index + 1
+
