@@ -3,17 +3,16 @@ import valid
 def get_name():
     while True:
         name = input("Enter Name:- ")
-        if name.isalpha():
+        if valid.valid_name(name)[1]:
             return 200, name
         print("Enter alphabet values")
 
 def get_phone():
     while True:
         phone = input("Enter Phone:- ")
-        if phone.isnumeric() and 10 <= (len(phone)) <= 12:
+        if valid.valid_phone(phone)[1]:
             return 200, phone
-        return 400, None
-
+        
 
 def create_row_dict(file):
     keys = ["Name", "Phone"]
@@ -22,4 +21,4 @@ def create_row_dict(file):
     if valid.validate_row(file, row_dict):
         return 200, row_dict
 
-print(create_row_dict("crm.csv"))
+# print(create_row_dict("crm.csv"))
