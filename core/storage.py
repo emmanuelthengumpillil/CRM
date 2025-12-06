@@ -46,3 +46,13 @@ def get_next_id(file):
     id_index = int(crm[-1]["ID"])
     return id_index + 1
 
+
+def find_row_by_id(file, user_id):
+    crm = read_csv(file)[1]
+    if str(user_id).isdigit():
+        for row in crm:
+            if row["ID"] == user_id:
+                return 200, True, row
+        return 200, False, None
+
+
