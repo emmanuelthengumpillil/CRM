@@ -43,7 +43,10 @@ def validate_row(file,row_dict):
 def valid_name(name):
     if str(name).isalpha() and not "":
         return 200, True, name
-    else:
-        return 405, False, name
+    return 405, False, None
 
 
+def valid_phone(phone):
+    if str(phone).isdigit and not "":
+        return 200, True, phone
+    return 405, False, None
