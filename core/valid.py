@@ -15,6 +15,8 @@ def valid_row_data(row_dict):
 def validate_keys(file, row_dict):
     header = storage.read_csv(file)[2]
     # set() will ignore it from checking the order
+    if header == None:
+        return 405, False, None
     if not set(header) == set(row_dict.keys()):
         return 405, False, None
     return 200, True, row_dict
@@ -36,5 +38,12 @@ def validate_row(file,row_dict):
             return 404, False, None
         return 404, False, None
     return 404, False, None
+
+
+def valid_name(name):
+    if str(name).isalpha() and not "":
+        return 200, True, name
+    else:
+        return 405, False, name
 
 
