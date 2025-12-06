@@ -56,3 +56,12 @@ def find_row_by_id(file, user_id):
         return 200, False, None
 
 
+def load_all(file):
+    crm = read_csv(file)[1]
+    header = read_csv(file)[2]
+    if header != None:
+        print(header)
+    for row in crm:
+        print(list(row.values()))
+
+
