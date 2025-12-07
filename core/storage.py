@@ -21,8 +21,6 @@ def read_csv(file):
     except FileNotFoundError:
         return 404, None, None
 
-# print(read_csv(f))
-
 
 def write_csv(file, rows):
     crm = read_csv(file)[1]
@@ -54,7 +52,19 @@ def get_next_id(file):
         if crm != []:
             id_index = int(crm[-1]["ID"])
             return id_index + 1
+        return "1"
+    except IndexError:
+        print("Index out of range")
         return None
+
+
+def get_current_id(file, name, phone):
+    crm = read_csv(file)[1]
+    try:
+        if crm != []:
+            for row in crm:
+                if row["Name"] == name and row["Phone"] == phone:
+                    return row["ID"]
     except IndexError:
         print("Index out of range")
         return None
