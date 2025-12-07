@@ -9,12 +9,19 @@ def read_csv(file):
         with open(file,'r',newline='') as reading_file:
             reader = csv.DictReader(reading_file)
             header = reader.fieldnames
-            if header != None:
-                for row in reader:
-                    crm_list.append(row)
+
+            if header == None:
+                return 406, [], None
+
+            for row in reader:
+                crm_list.append(row)
+
             return 200, crm_list, header
+
     except FileNotFoundError:
         return 404, None, None
+
+# print(read_csv(f))
 
 
 def write_csv(file, rows):
@@ -43,8 +50,14 @@ def rewrite_csv(file,list_of_rows):
 
 def get_next_id(file):
     crm  = read_csv(file)[1]
-    id_index = int(crm[-1]["ID"])
-    return id_index + 1
+    try:
+        if crm != []:
+            id_index = int(crm[-1]["ID"])
+            return id_index + 1
+        return None
+    except IndexError:
+        print("Index out of range")
+        return None
 
 
 def find_row_by_id(file, user_id):
