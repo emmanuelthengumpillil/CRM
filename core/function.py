@@ -17,3 +17,13 @@ def create_row_dict(file):
     return 400, None
 
 
+def add_person_crm(file):
+    crm = storage.read_csv(file)[1]
+    row = create_row_dict(f)[1]
+    if row != None:
+        if valid.validate_row(file, row)[1]:
+            storage.write_csv(file, row)
+            return 200, crm, True
+    return 404, crm, False
+
+
