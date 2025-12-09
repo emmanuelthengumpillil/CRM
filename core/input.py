@@ -22,7 +22,7 @@ def get_id():
 
 
 def get_input():
-    name = get_name()[2]
-    phone = get_phone()[2]
+    name = get_name()["data"]
+    phone = get_phone()["data"]
     list = [name,phone]
     return {"success":True, "data": list}
