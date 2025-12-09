@@ -51,44 +51,57 @@ def rewrite_csv(file,list_of_rows):
 
 
 def get_next_id(file):
-    crm  = read_csv(file)[1]
-    try:
-        if crm != []:
-            id_index = int(crm[-1]["ID"])
-            return id_index + 1
-        return "1"
-    except IndexError:
-        print("Index out of range")
-        return None
+    result = read_csv(file)
+    if result["success"] == True:
+        crm = result["data"]
+        try:
+            if crm != []:
+                id_index = int(crm[-1]["ID"])
+                return {"success":True, "data": id_index + 1}
+            return {"success":False, "error": "Csv is empty"}
+        except IndexError:
+            return {"success":False, "error": "Index out of range"}
+    return {"success" : False, "error" : "Error in reading file"}
 
 
 def get_current_id(file, name, phone):
-    crm = read_csv(file)[1]
-    try:
-        if crm != []:
-            for row in crm:
-                if row["Name"] == name and row["Phone"] == phone:
-                    return row["ID"]
-    except IndexError:
-        print("Index out of range")
-        return None
+    result = read_csv(file)
+    if result["success"] == True:
+        crm = result["data"]
+        try:
+            if crm != []:
+                for row in crm:
+                    if row["Name"] == name and row["Phone"] == phone:
+                        return {"success":True, "data": row["ID"]}
+            return {"success":False, "error": "Csv is empty"}
+        except IndexError:
+            return {"success":False, "error": "Index out of range"}
+    return {"success" : False, "error" : "Error in reading file"}
 
 
 def find_row_by_id(file, user_id):
-    crm = read_csv(file)[1]
-    if str(user_id).isdigit():
-        for row in crm:
-            if row["ID"] == user_id:
-                return 200, True, row
-        return 200, False, None
+    result = read_csv(file)
+    if result["success"] == True:
+        crm = result["data"]
+        if str(user_id).isdigit():
+            for row in crm:
+                if row["ID"] == user_id:
+                    return {"success":True, "data": row}
+        return {"success":False, "error": "user_id not integer"}
+    return {"success" : False, "error" : "Error in reading file"}
 
 
 def load_all(file):
-    crm = read_csv(file)[1]
-    header = read_csv(file)[2]
-    if header != None:
-        print(header)
-    for row in crm:
-        print(list(row.values()))
-
+    result = read_csv(file)
+    copy = []
+    if result["success"] == True:
+        crm = result["data"]
+        header = result["header"]
+        if header != None:
+            copy.append(header)
+        for row in crm:
+            row_list = list(row.values())
+            copy.append(row_list)
+        return {"success":True,"data":copy}
+    return {"success" : False, "error" : "Error in reading file"}
 
