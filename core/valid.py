@@ -41,9 +41,13 @@ def validate_row(file,row_dict):
 
 
 def valid_name(name):
-    if str(name).isdigit() == False:
-        return {"success":True,"data": name}
-    return {"success": False, "error": "Name is not valid"}
+    if name == "":
+        return {"success":False,"error": "name is empty"}
+    
+    for letter in name:
+        if not (str(letter).isalpha() or str(letter).isspace()):
+            return {"success": False, "error" : "Contains invalid data type"}
+    return {"success": True, "data": name}
 
 
 def valid_phone(phone):
