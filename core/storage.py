@@ -56,7 +56,7 @@ def get_next_id(file):
         crm = result["data"]
         try:
             if crm != []:
-                id_index = int(crm[-1]["ID"])
+                id_index = int(crm[-1]["id"])
                 return {"success":True, "data": id_index + 1}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
@@ -72,7 +72,7 @@ def get_current_id(file, name, phone):
             if crm != []:
                 for row in crm:
                     if row["Name"] == name and row["Phone"] == phone:
-                        return {"success":True, "data": row["ID"]}
+                        return {"success":True, "data": row["id"]}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
             return {"success":False, "error": "Index out of range"}
@@ -105,3 +105,4 @@ def load_all(file):
         return {"success":True,"data":copy}
     return {"success" : False, "error" : "Error in reading file"}
 
+print(read_csv(f)["header"])
