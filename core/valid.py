@@ -8,46 +8,46 @@ f = "crm.csv"
 
 def valid_row_data(row_dict):
     if not isinstance(row_dict, dict):
-        return 404, False, None  
-    return 200, True, row_dict
+        return False
+    return True
 
 
 def validate_keys(file, row_dict):
-    header = storage.read_csv(file)[2]
+    header = storage.read_csv(file)["header"]
     # set() will ignore it from checking the order
     if header == None:
-        return 405, False, None
-    if not set(header) == set(row_dict.keys()):
-        return 405, False, None
-    return 200, True, row_dict
+        return False
+    if set(header) != set(row_dict.keys()):
+        return False
+    return True
 
 
 def validate_not_empty(row_dict):
-    values = list(row_dict.values())
-    for i in range(len(row_dict)):
-        if values[i] == "" or values[i] is None:
-            return 404, False, None
-    return 200, True, row_dict
+    # values = list(row_dict.values())
+    for i in row_dict.values():
+        if i == "" or i == None:
+            return False
+    return True
 
 
 def validate_row(file,row_dict):
-    if valid_row_data(row_dict)[1]:
-        if validate_keys(file, row_dict)[1]:
-            if validate_not_empty(row_dict)[1]:
-                return 200, True, row_dict
-            return 404, False, None
-        return 404, False, None
-    return 404, False, None
+    if valid_row_data(row_dict):
+        if validate_keys(file, row_dict):
+            if validate_not_empty(row_dict):
+                return {"success": True, "data": row_dict}
+            return {"success": False, "error": "row_dict is empty"}
+        return {"success": False, "error": "key is not valid"}
+    return {"success": False, "error": "row_data invalid"}
 
 
 def valid_name(name):
-    if str(name).isalpha() and not "":
-        return 200, True, name
-    return 405, False, None
+    if str(name).isdigit() == False:
+        return {"success":True,"data": name}
+    return {"success": False, "error": "Name is not valid"}
 
 
 def valid_phone(phone):
-    if str(phone).isdigit and not "":
+    if str(phone).isdigit() and phone != "":
         if 10 <= len(phone) <= 12:
-            return 200, True, phone
-    return 405, False, None
+            return {"success":True,"data": phone}
+    return {"success": False, "error": "Phone Number is not valid"}
