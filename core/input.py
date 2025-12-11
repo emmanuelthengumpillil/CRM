@@ -3,14 +3,14 @@ import valid
 def get_name():
     while True:
         name = input("Enter Name:- ")
-        if valid.valid_name(name)[1]:
+        if valid.valid_name(name)["success"]:
             return {"success":True, "data":name}
         print("Enter alphabet values")
 
 def get_phone():
     while True:
         phone = input("Enter Phone:- ")
-        if valid.valid_phone(phone)[1]:
+        if valid.valid_phone(phone)["success"]:
             return {"success":True, "data": phone}
 
 
