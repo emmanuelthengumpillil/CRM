@@ -16,13 +16,12 @@ def read_csv(file):
                 crm_list.append(row)
             return {"success": True, "data": crm_list, "header" : header}
     except (FileNotFoundError,PermissionError,UnicodeDecodeError) as e:
-        return {"success": False, "error": str(e)}
+        return {"success": False, "error": "File not found"}
 
 
 def write_csv(file, rows):
     result = read_csv(file)
     if result["success"] == True:
-        crm = result["data"]
         header = result["header"]
         try:
             with open(file,"a",newline = '') as append_file:
@@ -105,4 +104,3 @@ def load_all(file):
         return {"success":True,"data":copy}
     return {"success" : False, "error" : "Error in reading file"}
 
-print(read_csv(f)["header"])
