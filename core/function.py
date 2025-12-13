@@ -73,8 +73,16 @@ def remove_person_crm(file):
                 if row != row_to_be_deleted:
                     new_row.append(row)
             # print(new_row)
-            storage.rewrite_csv("crm.csv",new_row)
+            storage.rewrite_csv(file,file,new_row)
             return {"success":True, "data":new_row}
     return {"success": False, "error": "File not found"}
 
 
+def create_duplicate_file(old_file, new_file):
+    result = storage.read_csv(old_file)
+    if result["success"]:
+        crm = result["data"]
+        write_result = storage.rewrite_csv(old_file,new_file,crm)
+        print(write_result)
+
+create_duplicate_file(f,"crmcopy.csv")
