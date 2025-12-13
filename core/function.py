@@ -62,22 +62,19 @@ def add_person_crm(file):
     return {"success":False, "error":"Couldn't add person"}
 
 
-print(add_person_crm("crm.csv"))
-
 def remove_person_crm(file):
     new_row = []
-    crm = storage.read_csv(file)[1]
-    old_row = create_row_dict(f)[1]
-    print(old_row)
-    if valid.validate_row(file, old_row)["success"]:
-        read_file = storage.read_csv(file)[1]
-        for row in read_file:
-            if row != old_row:
-                new_row.append(row)
-        print(new_row)
-        storage.write_csv("crm.csv",new_row)
-        return 202, crm, None
-    return 404, crm, None 
+    result = storage.read_csv(file)
+    if result["success"]:
+        row_result = create_row_dict(file)
+        if row_result["success"]:
+            row_to_be_deleted = row_result["data"]
+            for row in result["data"]:
+                if row != row_to_be_deleted:
+                    new_row.append(row)
+            # print(new_row)
+            storage.rewrite_csv("crm.csv",new_row)
+            return {"success":True, "data":new_row}
+    return {"success": False, "error": "File not found"}
 
 
-# print(create_row_dict(f)["data"])
