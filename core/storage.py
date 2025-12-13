@@ -33,13 +33,13 @@ def write_csv(file, rows):
     return {"success" : False, "error" : "Error in reading file"}
 
 
-def rewrite_csv(file,list_of_rows):
+def rewrite_csv(file,new_file,list_of_rows):
     result = read_csv(file)
     if result["success"] == True:
         # As write will anyway create a new file File not fpund error is excluded
         crm = result["data"]
         header = result["header"]
-        with open(file, "w", newline='') as write_file:
+        with open(new_file, "w", newline='') as write_file:
             writer = csv.DictWriter(write_file, fieldnames=header)
             writer.writeheader()
             for row in list_of_rows:
