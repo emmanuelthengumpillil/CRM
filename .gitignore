@@ -1,0 +1,10 @@
+# Ignore all sensitive data
+core/data/
+*.csv
+*.db
+
+# Python
+venv/
+__pycache__/
+.env
+
