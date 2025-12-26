@@ -1,5 +1,5 @@
 import storage
-
+import re
 
 row = {"Name":"jkljk","Phone":"13213"}
 row2 = {"Phone":"132465","Name":"qweqw"}
@@ -55,3 +55,7 @@ def valid_phone(phone):
         if 10 <= len(phone) <= 12:
             return {"success":True,"data": phone}
     return {"success": False, "error": "Phone Number is not valid"}
+
+
+def valid_email(email):
+    
