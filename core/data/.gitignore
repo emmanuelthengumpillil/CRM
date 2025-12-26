@@ -1,0 +1,7 @@
+# Ignore databases
+*.db
+*.csv
+*.sqlite
+*.sqlite3
+database/
+.env
