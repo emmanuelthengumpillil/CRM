@@ -26,3 +26,12 @@ def get_input():
     phone = get_phone()["data"]
     list = [name,phone]
     return {"success":True, "data": list}
+
+
+def get_choice():
+    while True:
+        choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW :- ").lower()
+        if choice in {"add","remove","update","search","view"}:
+            return {"success":True, "data": choice}
+        print("== Please enter among the following choices ==")
+
