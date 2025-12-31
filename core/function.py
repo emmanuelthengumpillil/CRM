@@ -89,9 +89,17 @@ def search_person_crm():
     pass
 
 
-def view_crm():
-    pass
-
+def view_crm(file):
+    x = storage.load_all(file)
+    if x["success"]:
+        for lt in x["data"]:
+            print(lt)
+            return {"success": True}
+    else:
+        return{"success": False}
 
 def update_person_crm():
     pass
+
+
+view_crm("data//crm.csv")
