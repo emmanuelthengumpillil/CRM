@@ -9,7 +9,7 @@ if ch == "add":
 elif ch == "search":
     function.search_person_crm()
 elif ch == "remove":
-    function.remove_person_crm()
+    function.remove_person_crm(file)
 elif ch == "update":
     function.update_person_crm()
 elif ch == "view":
