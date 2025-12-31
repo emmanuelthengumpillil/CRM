@@ -104,3 +104,6 @@ def load_all(file):
         return {"success":True,"data":copy}
     return {"success" : False, "error" : "Error in reading file"}
 
+
+def get_id(file,name):
+    pass
