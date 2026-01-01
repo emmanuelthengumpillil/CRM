@@ -83,7 +83,7 @@ def create_duplicate_file(old_file, new_file):
     if old_result["success"]:
         write_result = storage.rewrite_csv(old_file,new_file)
         print(write_result)
-#create dupulicate not complete
+
 
 def search_person_crm():
     pass
@@ -98,9 +98,9 @@ def view_crm(file):
     else:
         return{"success": False}
 
+
 def update_person_crm():
     pass
 
 
 # view_crm("data//crm.csv")
-create_duplicate_file("data\\crm.csv","data\\sorted_crm.csv")
