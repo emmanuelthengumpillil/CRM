@@ -1,24 +1,56 @@
-Storage and File Sharing Platform
-Build this project step by step with our detailed tutorial on JavaScript Mastery YouTube. Join the JSM family!
-📋 Table of Contents
-1. 🤖 Introduction
-2. ⚙️ Tech Stack
-3. 🔋 Features
-4. 🤸 Quick Start
-5. 🔗 Assets
-6. 🚀 More
+# 📇 Python CRM System
 
-🤖 Introduction
-A storage management and file sharing platform that lets users effortlessly upload, organize, and share files. Built with the latest Next.js 15 and the Appwrite Node SDK, utilizing advanced features for seamless file management.
+> A beginner-friendly **Command Line CRM (Customer Relationship Management)** system built using Python and CSV files.
 
-If you're getting started and need assistance or face any bugs, join our active Discord community with over 34k+ members. It's a place where people help each other out.
+---
 
-⚙️ Tech Stack
-. React 19
-. Next.js 15
-. Appwrite
-. TailwindCSS
-. ShadCN
-. TypeScript
+## 🚀 Features
 
-🔋 Features
+- ➕ Add new customer records  
+- ❌ Remove existing customers  
+- ✏️ Update customer details  
+- 🔍 Search customers by name (supports partial search)  
+- 📄 View all records in a structured format  
+- 💾 Persistent storage using CSV files  
+
+---
+
+## 🛠️ Tech Stack
+
+- 🐍 **Python 3**
+- 📊 **CSV File Handling**
+- 🖥️ **CLI-based Interface**
+
+---
+
+## 📂 Project Structure
+crm/
+|
+├── data/
+│ └── data.csv # Stores customer records
+│
+├── main.py # Entry point
+├── crm_utils.py # Core CRM logic
+├── README.md
+└── requirements.txt
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository  
+   ```bash
+    git clone https://github.com/emmanuelthengumpillil/crm.git
+
+#🔮 Planned Improvements
+🔄 Replace CSV with SQLite
+⚡ Improve search performance
+🧱 Better code modularization
+🧪 Add basic tests
+🌐 Convert to REST API (future)
+
+
+#👨‍💻 Author
+##Emmanuel Paul
+emmanuelthengumpillil@gmail.com
+Student | Entrepreneur | Builder 🚀
