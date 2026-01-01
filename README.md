@@ -1,24 +1,41 @@
-Storage and File Sharing Platform
-Build this project step by step with our detailed tutorial on JavaScript Mastery YouTube. Join the JSM family!
-📋 Table of Contents
-1. 🤖 Introduction
-2. ⚙️ Tech Stack
-3. 🔋 Features
-4. 🤸 Quick Start
-5. 🔗 Assets
-6. 🚀 More
 
-🤖 Introduction
-A storage management and file sharing platform that lets users effortlessly upload, organize, and share files. Built with the latest Next.js 15 and the Appwrite Node SDK, utilizing advanced features for seamless file management.
+FUNCTIONS IN CRM
 
-If you're getting started and need assistance or face any bugs, join our active Discord community with over 34k+ members. It's a place where people help each other out.
 
-⚙️ Tech Stack
-. React 19
-. Next.js 15
-. Appwrite
-. TailwindCSS
-. ShadCN
-. TypeScript
 
-🔋 Features
+STORAGE.PY
+----------
+read_csv(file)
+write_csv(file,row_dict)
+rewrite_csv(file,rows,header)
+get_next_id(file)
+find_row_by_id(file,id)
+load_all(file)
+
+
+VALID.PY
+--------
+valid_name(name)
+valid_phone(phone)
+valid_email(email)
+valid_dict(dict,header)
+
+
+INPUTS.PY
+---------
+get_name()
+get_phone()
+get_email()
+get_id()
+
+
+FUNCTIONS.PY
+------------
+add_person(file, row)
+remove_person(file, row)
+update_person(file, old_row, new_row)
+search_person(file, criteria)
+display_all(file)
+is_duplicate(file,row_dict)
+
+

@@ -3,9 +3,13 @@ core/data/
 *.csv
 *.db
 
-# Python
-venv/
+# Python cache
 __pycache__/
-.env
-.pyc
+*.pyc
 
+# Pytest
+.pytest_cache/
+
+# Virtual environments
+venv/
+.env
