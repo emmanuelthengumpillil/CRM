@@ -20,7 +20,7 @@ def is_duplicate(file,row_list):
 
 
 def create_row_dict(file):
-    keys = ["ID", "Name", "Phone"]
+    keys = ["Id", "Name", "Phone"]
     result = storage.read_csv(file)
     if result["success"]:
         crm = result["data"]
@@ -50,6 +50,7 @@ def create_row_dict(file):
 
 
 def add_person_crm(file):
+    crm = storage.read_csv(file)
     row = create_row_dict(file)
     if row["success"]:
         data = row["data"]
@@ -78,10 +79,9 @@ def remove_person_crm(file):
 
 
 def create_duplicate_file(old_file, new_file):
-    result = storage.read_csv(old_file)
-    if result["success"]:
-        crm = result["data"]
-        write_result = storage.rewrite_csv(old_file,new_file,crm)
+    old_result = storage.read_csv(old_file)
+    if old_result["success"]:
+        write_result = storage.rewrite_csv(old_file,new_file)
         print(write_result)
 #create dupulicate not complete
 
@@ -102,4 +102,5 @@ def update_person_crm():
     pass
 
 
-view_crm("data//crm.csv")
+# view_crm("data//crm.csv")
+create_duplicate_file("data\\crm.csv","data\\sorted_crm.csv")
