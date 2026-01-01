@@ -33,20 +33,18 @@ def write_csv(file, rows):
     return {"success" : False, "error" : "Error in reading file"}
 
 
-def rewrite_csv(file,new_file,list_of_rows):
-    result = read_csv(file)
-    if result["success"] == True:
-        # As write will anyway create a new file File not fpund error is excluded
-        crm = result["data"]
-        header = result["header"]
+def rewrite_csv(old_file,new_file):
+    old_result = read_csv(old_file)
+    if old_result["success"] == True:
+        old_crm = old_result["data"]
+        old_header = old_result["header"]
         with open(new_file, "w", newline='') as write_file:
-            writer = csv.DictWriter(write_file, fieldnames=header)
+            writer = csv.DictWriter(write_file, fieldnames=old_header)
             writer.writeheader()
-            for row in list_of_rows:
+            for row in old_crm:
                 writer.writerow(row)
             return {"success" : True, "msg":"Csv rewritten"}
     return {"success" : False, "error" : "Error in reading file"}
-
 
 
 def get_next_id(file):
@@ -55,8 +53,8 @@ def get_next_id(file):
         crm = result["data"]
         try:
             if crm != []:
-                id_index = int(crm[-1]["id"])
-                return {"success":True, "data": id_index + 1}
+                id_index = int(crm[-1]["Id"])
+                return {"success":True, "data": id_index + 1, "crm" : result}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
             return {"success":False, "error": "Index out of range"}
@@ -71,7 +69,7 @@ def get_current_id(file, name, phone):
             if crm != []:
                 for row in crm:
                     if row["Name"] == name and row["Phone"] == phone:
-                        return {"success":True, "data": row["id"]}
+                        return {"success":True, "data": row["Id"], "crm" : result}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
             return {"success":False, "error": "Index out of range"}
@@ -84,7 +82,7 @@ def find_row_by_id(file, user_id):
         crm = result["data"]
         if str(user_id).isdigit():
             for row in crm:
-                if row["ID"] == user_id:
+                if row["Id"] == user_id:
                     return {"success":True, "data": row}
         return {"success":False, "error": "user_id not integer"}
     return {"success" : False, "error" : "Error in reading file"}
@@ -101,9 +99,29 @@ def load_all(file):
         for row in crm:
             row_list = list(row.values())
             copy.append(row_list)
-        return {"success":True,"data":copy}
+        return {"success":True,"data":copy, "crm" : result}
     return {"success" : False, "error" : "Error in reading file"}
+
+
+#sort_crm not working
+def sort_crm(file, new_file):
+    crm = read_csv(file)
+    if crm["success"]:
+        sort = []
+        for row1 in crm["data"]:
+            r1 = row1["Name"]
+            for row2 in crm["data"]:
+                r2 = row2["Name"]
+                if r1 > r2:
+                    r1, r2 = r2, r1
+            sort.append(r1)
+        print(sort)
+        # rewrite_csv(file, new_file)
+        return {"success": True, "data":sort}
 
 
 def get_id(file,name):
     pass
+
+
+# sort_crm("data\\crm.csv", "data\\sorted_crm.csv")
