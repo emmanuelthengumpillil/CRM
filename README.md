@@ -1,41 +1,56 @@
+# 📇 Python CRM System
 
-FUNCTIONS IN CRM
+> A beginner-friendly **Command Line CRM (Customer Relationship Management)** system built using Python and CSV files.
+
+---
+
+## 🚀 Features
+
+- ➕ Add new customer records  
+- ❌ Remove existing customers  
+- ✏️ Update customer details  
+- 🔍 Search customers by name (supports partial search)  
+- 📄 View all records in a structured format  
+- 💾 Persistent storage using CSV files  
+
+---
+
+## 🛠️ Tech Stack
+
+- 🐍 **Python 3**
+- 📊 **CSV File Handling**
+- 🖥️ **CLI-based Interface**
+
+---
+
+## 📂 Project Structure
+crm/
+|
+├── data/
+│ └── data.csv # Stores customer records
+│
+├── main.py # Entry point
+├── crm_utils.py # Core CRM logic
+├── README.md
+└── requirements.txt
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository  
+   ```bash
+    git clone https://github.com/emmanuelthengumpillil/crm.git
+
+#🔮 Planned Improvements
+🔄 Replace CSV with SQLite
+⚡ Improve search performance
+🧱 Better code modularization
+🧪 Add basic tests
+🌐 Convert to REST API (future)
 
 
-
-STORAGE.PY
-----------
-read_csv(file)
-write_csv(file,row_dict)
-rewrite_csv(file,rows,header)
-get_next_id(file)
-find_row_by_id(file,id)
-load_all(file)
-
-
-VALID.PY
---------
-valid_name(name)
-valid_phone(phone)
-valid_email(email)
-valid_dict(dict,header)
-
-
-INPUTS.PY
----------
-get_name()
-get_phone()
-get_email()
-get_id()
-
-
-FUNCTIONS.PY
-------------
-add_person(file, row)
-remove_person(file, row)
-update_person(file, old_row, new_row)
-search_person(file, criteria)
-display_all(file)
-is_duplicate(file,row_dict)
-
-
+#👨‍💻 Author
+##Emmanuel Paul
+emmanuelthengumpillil@gmail.com
+Student | Entrepreneur | Builder 🚀
