@@ -1,7 +1,7 @@
 import storage
+import input
 
-
-def bubble_sort(data):
+def bubble_sort_name(data):
     if data["success"]:
         l = len(data["data"])
         for i in range(l):
@@ -16,10 +16,21 @@ def get_id_by_name(user_name, crm):
     user_name = user_name.lower()
     data = storage.read_csv(crm)
     if data["success"]:
-        sorted_data = bubble_sort(data)["data"]
-        for i in range(len(sorted_data)-1):
-            if user_name == sorted_data[i]["Name"]:
+        sorted_data = bubble_sort_name(data)["data"]
+        for i in range(len(sorted_data)):
+            if user_name == sorted_data[i]["Name"].lower():
                 return {"success": True, "data": sorted_data[i]["Id"]}
         return {"success": False, "error": "--Name not found--"}
     return {"success": False, "error": "Couldn't get user_id"}
+
+
+def get_id_by_phone(phone, crm):
+    data = storage.read_csv(crm)
+    if data["success"]:
+        for i in range(len(data["data"])):
+            if phone == data["data"][i]["Phone"]:
+                return {"success": True, "data": data["data"][i]["Id"]}
+        return {"success": False, "error" :"Phone no not found"}
+    return {"success": False, "error": "Couldn't read crm"}
+
 
