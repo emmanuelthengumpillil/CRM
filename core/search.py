@@ -1,9 +1,7 @@
 import storage
 
-user_list = [7,1,3,4,5,3,5,6,8,9,4,7,6,8,6,5,4,5,7,8,9,8,9,0,7]
 
-def bubble_sort(dit):
-    data = storage.read_csv(dit)
+def bubble_sort(data):
     if data["success"]:
         l = len(data["data"])
         for i in range(l):
@@ -14,5 +12,14 @@ def bubble_sort(dit):
     return {"success": False, "data": None}
 
 
-def search(user_name):
-    pass
+def get_id_by_name(user_name, crm):
+    user_name = user_name.lower()
+    data = storage.read_csv(crm)
+    if data["success"]:
+        sorted_data = bubble_sort(data)["data"]
+        for i in range(len(sorted_data)-1):
+            if user_name == sorted_data[i]["Name"]:
+                return {"success": True, "data": sorted_data[i]["Id"]}
+        return {"success": False, "error": "--Name not found--"}
+    return {"success": False, "error": "Couldn't get user_id"}
+
