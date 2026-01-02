@@ -29,9 +29,15 @@ def get_input():
 
 
 def get_choice():
+    ch = ["add","remove","update","search","view"]
     while True:
         choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW :- ").lower()
-        if choice in {"add","remove","update","search","view"}:
-            return {"success":True, "data": choice}
+        for i in range(len(ch)):
+            if choice == ch[i]:
+                return {"success":True, "data": choice}
         print("== Please enter among the following choices ==")
 
+
+def get_file():
+    while True:
+        file = input("get file name:- ")

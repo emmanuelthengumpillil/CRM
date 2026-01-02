@@ -1,6 +1,6 @@
 import storage
 import valid
-import input
+import inpt
 
 f = "crm.csv"
 row1 = {"Name": "hello", "Phone" : "1234567890"}
@@ -27,7 +27,7 @@ def create_row_dict(file):
         header = result["header"]
         keys = header
         if crm != []:
-            name, phone = input.get_input()["data"]
+            name, phone = inpt.get_input()["data"]
             result_id = storage.get_current_id(file, name, phone)
             if result_id["success"]:
                 if result_id["data"] != None:

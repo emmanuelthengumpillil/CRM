@@ -1,19 +1,47 @@
 import function
-import input
+import inpt
+import search
 
-ch = input.get_choice()["data"]
-file = "data\\crm.csv"
 
-if ch == "add":
-    function.add_person_crm(file)
-elif ch == "search":
-    function.search_person_crm()
-elif ch == "remove":
-    function.remove_person_crm(file)
-elif ch == "update":
-    function.update_person_crm()
-elif ch == "view":
-    function.view_crm()
-else:
-    print("Choice not recognised")
+print("Welome to terminal crm")
+ch = inpt.get_choice()["data"]
+file = input("get file name:- ")
 
+
+def menu(file):
+    if ch == "add":
+        add = function.add_person_crm(file)
+        if add["success"]:
+            print("Success")
+        else:
+            print(add["error"])
+    elif ch == "search":
+        search = search.get_id_by_name(file)
+        if search["success"]:
+            print("Success")
+        else:
+            print(search["error"])
+    elif ch == "remove":
+        remove = function.remove_person_crm(file)
+        if remove["success"]:
+            print("Success")
+        else:
+            print(remove["error"])
+    elif ch == "update":
+        update = function.update_person_crm()
+        if update["success"]:
+            print("Success")
+        else:
+            print(update["error"])
+    elif ch == "view":
+        view = function.view_crm(file)
+        if view["success"]:
+            print("Success")
+        else:
+            print(view["error"])
+    else:
+        print("Choice not recognised")
+
+
+if __name__ == "__main__":
+    menu(file)
