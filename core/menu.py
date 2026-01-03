@@ -1,12 +1,15 @@
 import function
 import inpt
 import search
-
+import sys
 
 print("Welome to terminal crm")
-ch = inpt.get_choice()["data"]
-file = inpt.get_file()["data"]
 
+ch = inpt.get_choice()
+if ch["success"]:
+    file = inpt.get_file()["data"]
+else:
+    sys.exit()
 
 def menu(file):
     if ch == "add":
@@ -16,11 +19,11 @@ def menu(file):
         else:
             print(add["error"])
     elif ch == "search":
-        search = search.get_id_by_name(file)
-        if search["success"]:
+        srch = search.get_id_by_name(file)
+        if srch["success"]:
             print("Success")
         else:
-            print(search["error"])
+            print(srch["error"])
     elif ch == "remove":
         remove = function.remove_person_crm(file)
         if remove["success"]:

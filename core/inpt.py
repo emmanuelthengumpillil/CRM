@@ -29,15 +29,19 @@ def get_input():
 
 
 def get_choice():
-    ch = ["add","remove","update","search","view","exit"]
+    ch = ["add","remove","update","search","view"]
     while True:
         try:
             choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW / EXIT:- ").lower()
         except KeyboardInterrupt:
+            print()
             print("--Application Ended--")
+            return {"success": False, "error": "user forced exit"}
         for i in range(len(ch)):
             if choice == ch[i]:
                 return {"success":True, "data": choice}
+            elif choice == "exit":
+                return {"success": False, "error": "user forced exit"}
         print("-- Please enter among the following choices --")
 
 
