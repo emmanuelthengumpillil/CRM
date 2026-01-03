@@ -59,3 +59,13 @@ def valid_phone(phone):
 
 def valid_email(email):
     pass
+
+def valid_file(file):
+    try:
+        with open(file, "r") as read_file:
+            read_file.read()
+            return {"success": True, "data": "File exists"}
+    except FileNotFoundError:
+        return {"success": True, "error": "File no found"}
+    except PermissionError:
+        return {"success": True, "error": "File Permission Denied"}
