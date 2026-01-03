@@ -16,7 +16,7 @@ def read_csv(file):
                 crm_list.append(row)
             return {"success": True, "data": crm_list, "header" : header}
     except (FileNotFoundError,PermissionError,UnicodeDecodeError) as e:
-        return {"success": False, "error": "File not found"}
+        raise FileNotFoundError("File not found")
 
 
 def write_csv(file, rows):
