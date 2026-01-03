@@ -41,5 +41,5 @@ def get_choice():
 def get_file():
     while True:
         file = input("get file name:- ")
-        if valid.valid_file(file):
+        if valid.valid_file(file)["success"]:
             return {"success": True, "data": file}

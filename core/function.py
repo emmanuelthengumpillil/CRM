@@ -72,7 +72,7 @@ def remove_person_crm(file):
             for row in result["data"]:
                 if row != row_to_be_deleted:
                     new_row.append(row)
-            # print(new_row)
+            print(new_row)
             storage.rewrite_csv(file,file,new_row)
             return {"success":True, "data":new_row, "location":"remove_person"}
     return {"success": False, "error": "File not found", "location":"remove_person"}

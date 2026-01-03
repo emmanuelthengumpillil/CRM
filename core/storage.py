@@ -33,7 +33,7 @@ def write_csv(file, rows):
     return {"success" : False, "error" : "Error in reading file"}
 
 
-def rewrite_csv(old_file,new_file):
+def rewrite_csv(old_file,new_file, new_row):
     old_result = read_csv(old_file)
     if old_result["success"] == True:
         old_crm = old_result["data"]
@@ -41,7 +41,7 @@ def rewrite_csv(old_file,new_file):
         with open(new_file, "w", newline='') as write_file:
             writer = csv.DictWriter(write_file, fieldnames=old_header)
             writer.writeheader()
-            for row in old_crm:
+            for row in new_row:
                 writer.writerow(row)
             return {"success" : True, "msg":"Csv rewritten"}
     return {"success" : False, "error" : "Error in reading file"}

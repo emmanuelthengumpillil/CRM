@@ -5,7 +5,7 @@ import search
 
 print("Welome to terminal crm")
 ch = inpt.get_choice()["data"]
-file = input("get file name:- ")
+file = inpt.get_file()["data"]
 
 
 def menu(file):
