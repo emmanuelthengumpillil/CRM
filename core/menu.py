@@ -12,31 +12,31 @@ else:
     sys.exit()
 
 def menu(file):
-    if ch == "add":
+    if ch["data"] == "add":
         add = function.add_person_crm(file)
         if add["success"]:
             print("Success")
         else:
             print(add["error"])
-    elif ch == "search":
+    elif ch["data"] == "search":
         srch = search.get_id_by_name(file)
         if srch["success"]:
             print("Success")
         else:
             print(srch["error"])
-    elif ch == "remove":
+    elif ch["data"] == "remove":
         remove = function.remove_person_crm(file)
         if remove["success"]:
             print("Success")
         else:
             print(remove["error"])
-    elif ch == "update":
+    elif ch["data"] == "update":
         update = function.update_person_crm()
         if update["success"]:
             print("Success")
         else:
             print(update["error"])
-    elif ch == "view":
+    elif ch["data"] == "view":
         view = function.view_crm(file)
         if view["success"]:
             print("Success")
