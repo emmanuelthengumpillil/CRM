@@ -6,6 +6,9 @@ core/data/
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
 
 # Pytest
 .pytest_cache/
