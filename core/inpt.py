@@ -29,13 +29,16 @@ def get_input():
 
 
 def get_choice():
-    ch = ["add","remove","update","search","view"]
+    ch = ["add","remove","update","search","view","exit"]
     while True:
-        choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW :- ").lower()
+        try:
+            choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW / EXIT:- ").lower()
+        except KeyboardInterrupt:
+            print("--Application Ended--")
         for i in range(len(ch)):
             if choice == ch[i]:
                 return {"success":True, "data": choice}
-        print("== Please enter among the following choices ==")
+        print("-- Please enter among the following choices --")
 
 
 def get_file():
