@@ -1,4 +1,5 @@
 import valid
+import sys
 
 def get_name():
     while True:
@@ -6,6 +7,7 @@ def get_name():
         if valid.valid_name(name)["success"]:
             return {"success":True, "data":name}
         print("Enter alphabet values")
+
 
 def get_phone():
     while True:
@@ -41,7 +43,7 @@ def get_choice():
             if choice == ch[i]:
                 return {"success":True, "data": choice}
             elif choice == "exit":
-                return {"success": False, "error": "user forced exit"}
+                sys.exit()
         print("-- Please enter among the following choices --")
 
 

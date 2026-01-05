@@ -15,9 +15,10 @@ def menu(file):
     while True:
         ch = inpt.get_choice()
         if ch["success"]:
-            file = inpt.get_file()["data"]
+            file
         else:
             sys.exit()
+
         if ch["data"] == "add":
             add = function.add_person_crm(file)
             if add["success"]:

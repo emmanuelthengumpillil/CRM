@@ -103,4 +103,3 @@ def update_person_crm():
     pass
 
 
-# view_crm("data//crm.csv")
