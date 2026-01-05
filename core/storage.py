@@ -21,9 +21,9 @@ def read_csv(file):
 
 
 def write_csv(file, rows):
-    result = read_csv(file)
-    if result["success"] == True:
-        header = result["header"]
+    result = (file)
+    if file["success"] == True:
+        header = file["header"]
         try:
             with open(file,"a",newline = '') as append_file:
                 writer = csv.DictWriter(append_file, fieldnames=header)
@@ -49,13 +49,13 @@ def rewrite_csv(old_file,new_file, new_row):
 
 
 def get_next_id(file):
-    result = read_csv(file)
-    if result["success"] == True:
-        crm = result["data"]
+    file = file
+    if file["success"] == True:
+        crm = file["data"]
         try:
             if crm != []:
                 id_index = int(crm[-1]["Id"])
-                return {"success":True, "data": id_index + 1, "crm" : result}
+                return {"success":True, "data": id_index + 1, "crm" : file}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
             return {"success":False, "error": "Index out of range"}
@@ -63,7 +63,7 @@ def get_next_id(file):
 
 
 def get_current_id(file, name, phone):
-    result = read_csv(file)
+    result = file
     if result["success"] == True:
         crm = result["data"]
         try:
@@ -78,7 +78,7 @@ def get_current_id(file, name, phone):
 
 
 def find_row_by_id(file, user_id):
-    result = read_csv(file)
+    result = file
     if result["success"] == True:
         crm = result["data"]
         if str(user_id).isdigit():
@@ -90,7 +90,7 @@ def find_row_by_id(file, user_id):
 
 
 def load_all(file):
-    result = read_csv(file)
+    result = file
     copy = []
     if result["success"] == True:
         crm = result["data"]
@@ -106,7 +106,7 @@ def load_all(file):
 
 #sort_crm not working
 def sort_crm(file, new_file):
-    crm = read_csv(file)
+    crm = file
     if crm["success"]:
         sort = []
         for row1 in crm["data"]:
@@ -120,9 +120,3 @@ def sort_crm(file, new_file):
         # rewrite_csv(file, new_file)
         return {"success": True, "data":sort}
 
-
-def get_id(file,name):
-    pass
-
-
-# sort_crm("data\\crm.csv", "data\\sorted_crm.csv")

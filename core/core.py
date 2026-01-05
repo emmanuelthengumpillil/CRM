@@ -1,9 +1,14 @@
 import inpt
 import menu
 import storage
+import function
 
 
 file = inpt.get_file()["data"]
 
 while True:    
-    inpt.get_choice()
+    choice = inpt.get_choice()
+    if choice == "add":
+        name = inpt.get_name()
+        phone = inpt.get_phone()
+        function.add_person_crm(file, name, phone)

@@ -21,7 +21,7 @@ def is_duplicate(file,row_list):
 
 def create_row_dict(file):
     keys = ["Id", "Name", "Phone"]
-    result = storage.read_csv(file)
+    result = file
     if result["success"]:
         crm = result["data"]
         header = result["header"]
@@ -49,8 +49,7 @@ def create_row_dict(file):
     return {"success":False, "msg":"Couldn't read csv", "location":"create_row_dict"}
 
 
-def add_person_crm(file):
-    crm = storage.read_csv(file)
+def add_person_crm(file, name, phone):
     row = create_row_dict(file)
     if row["success"]:
         data = row["data"]
