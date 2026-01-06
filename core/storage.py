@@ -21,7 +21,6 @@ def read_csv(file):
 
 
 def write_csv(file, rows):
-    result = (file)
     if file["success"] == True:
         header = file["header"]
         try:
@@ -49,7 +48,6 @@ def rewrite_csv(old_file,new_file, new_row):
 
 
 def get_next_id(file):
-    file = file
     if file["success"] == True:
         crm = file["data"]
         try:
@@ -63,14 +61,13 @@ def get_next_id(file):
 
 
 def get_current_id(file, name, phone):
-    result = file
-    if result["success"] == True:
-        crm = result["data"]
+    if file["success"] == True:
+        crm = file["data"]
         try:
             if crm != []:
                 for row in crm:
                     if row["Name"] == name and row["Phone"] == phone:
-                        return {"success":True, "data": row["Id"], "crm" : result}
+                        return {"success":True, "data": row["Id"], "crm" : file}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
             return {"success":False, "error": "Index out of range"}
@@ -78,9 +75,8 @@ def get_current_id(file, name, phone):
 
 
 def find_row_by_id(file, user_id):
-    result = file
-    if result["success"] == True:
-        crm = result["data"]
+    if file["success"] == True:
+        crm = file["data"]
         if str(user_id).isdigit():
             for row in crm:
                 if row["Id"] == user_id:
@@ -90,17 +86,16 @@ def find_row_by_id(file, user_id):
 
 
 def load_all(file):
-    result = file
     copy = []
-    if result["success"] == True:
-        crm = result["data"]
-        header = result["header"]
+    if file["success"] == True:
+        crm = file["data"]
+        header = file["header"]
         if header != None:
             copy.append(header)
         for row in crm:
             row_list = list(row.values())
             copy.append(row_list)
-        return {"success":True,"data":copy, "crm" : result}
+        return {"success":True,"data":copy, "crm" : file}
     return {"success" : False, "error" : "Error in reading file"}
 
 
