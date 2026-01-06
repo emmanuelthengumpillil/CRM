@@ -8,9 +8,8 @@ row2 = {"Phone" : "1234567890", "Name": "hello"}
 
 
 def is_duplicate(file,row_list):
-    result = storage.read_csv(file)
-    if result["success"]:
-        crm = result["data"]
+    if file["success"]:
+        crm = file["data"]
         for row in crm:
             phone = row["Phone"]
             if row_list["Phone"] == phone:
@@ -21,10 +20,9 @@ def is_duplicate(file,row_list):
 
 def create_row_dict(file):
     keys = ["Id", "Name", "Phone"]
-    result = file
-    if result["success"]:
-        crm = result["data"]
-        header = result["header"]
+    if file["success"]:
+        crm = file["data"]
+        header = file["header"]
         keys = header
         if crm != []:
             name, phone = inpt.get_input()["data"]
@@ -63,12 +61,11 @@ def add_person_crm(file, name, phone):
 
 def remove_person_crm(file):
     new_row = []
-    result = storage.read_csv(file)
-    if result["success"]:
+    if file["success"]:
         row_result = create_row_dict(file)
         if row_result["success"]:
             row_to_be_deleted = row_result["data"]
-            for row in result["data"]:
+            for row in file["data"]:
                 if row != row_to_be_deleted:
                     new_row.append(row)
             print(new_row)
@@ -78,14 +75,9 @@ def remove_person_crm(file):
 
 
 def create_duplicate_file(old_file, new_file):
-    old_result = storage.read_csv(old_file)
-    if old_result["success"]:
+    if old_file["success"]:
         write_result = storage.rewrite_csv(old_file,new_file)
         print(write_result)
-
-
-def search_person_crm():
-    pass
 
 
 def view_crm(file):
@@ -96,9 +88,4 @@ def view_crm(file):
             return {"success": True}
     else:
         return{"success": False}
-
-
-def update_person_crm():
-    pass
-
 

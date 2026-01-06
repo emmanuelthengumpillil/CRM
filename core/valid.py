@@ -13,8 +13,7 @@ def valid_row_data(row_dict):
 
 
 def validate_keys(file, row_dict):
-    header = storage.read_csv(file)["header"]
-    # set() will ignore it from checking the order
+    header = file["header"]
     if header == None:
         return False
     if set(header) != set(row_dict.keys()):
@@ -23,7 +22,6 @@ def validate_keys(file, row_dict):
 
 
 def validate_not_empty(row_dict):
-    # values = list(row_dict.values())
     for i in row_dict.values():
         if i == "" or i == None:
             return False
@@ -59,6 +57,7 @@ def valid_phone(phone):
 
 def valid_email(email):
     pass
+
 
 def valid_file(file):
     try:
