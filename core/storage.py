@@ -1,9 +1,5 @@
 import csv
-import os
 
-f  = 'crm.csv'
-x = {'Name': 'hello', 'Phone' : '123456890'}
-l = [{'Name': 'hello', 'Phone' : '123456890'}]
 
 def read_csv(file):
     crm_list = []
@@ -16,9 +12,12 @@ def read_csv(file):
             for row in reader:
                 crm_list.append(row)
             return {"success": True, "data": crm_list, "header" : header}
-    except (FileNotFoundError,PermissionError,UnicodeDecodeError) as e:
-        raise FileNotFoundError("File not found")
-
+    except (FileNotFoundError) as e:
+        raise FileNotFoundError(e)
+    except (PermissionError) as e:
+        raise PermissionError(e)
+    except (UnicodeEncodeError) as e:
+        raise UnicodeEncodeError(e)
 
 def write_csv(file, rows):
     if file["success"] == True:
@@ -28,9 +27,13 @@ def write_csv(file, rows):
                 writer = csv.DictWriter(append_file, fieldnames=header)
                 writer.writerow(rows)
                 return {"success": True, "msg":"Row written to csv"}
-        except (FileNotFoundError,PermissionError,UnicodeDecodeError) as e:
-            return {"success" : False, "error" : e}
-    return {"success" : False, "error" : "Error in reading file"}
+        except (FileNotFoundError) as e:
+            raise FileNotFoundError(e)
+        except (PermissionError) as e:
+            raise PermissionError(e)
+        except (UnicodeEncodeError) as e:
+            raise UnicodeEncodeError(e)
+    raise FileNotFoundError("File not found")
 
 
 def rewrite_csv(old_file,new_file, new_row):
@@ -44,7 +47,7 @@ def rewrite_csv(old_file,new_file, new_row):
             for row in new_row:
                 writer.writerow(row)
             return {"success" : True, "msg":"Csv rewritten"}
-    return {"success" : False, "error" : "Error in reading file"}
+    raise FileNotFoundError("File not found")
 
 
 def get_next_id(file):
@@ -56,8 +59,8 @@ def get_next_id(file):
                 return {"success":True, "data": id_index + 1, "crm" : file}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
-            return {"success":False, "error": "Index out of range"}
-    return {"success" : False, "error" : "Error in reading file"}
+            raise IndexError("Index Error found")
+    raise FileNotFoundError("File not found")
 
 
 def get_current_id(file, name, phone):
@@ -70,8 +73,8 @@ def get_current_id(file, name, phone):
                         return {"success":True, "data": row["Id"], "crm" : file}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:
-            return {"success":False, "error": "Index out of range"}
-    return {"success" : False, "error" : "Error in reading file"}
+            raise IndexError("Index Error found")
+    raise FileNotFoundError("File not found")
 
 
 def find_row_by_id(file, user_id):
@@ -81,8 +84,8 @@ def find_row_by_id(file, user_id):
             for row in crm:
                 if row["Id"] == user_id:
                     return {"success":True, "data": row}
-        return {"success":False, "error": "user_id not integer"}
-    return {"success" : False, "error" : "Error in reading file"}
+        raise ValueError ("invalid data type")
+    raise FileNotFoundError("File not found")
 
 
 def load_all(file):
@@ -96,7 +99,7 @@ def load_all(file):
             row_list = list(row.values())
             copy.append(row_list)
         return {"success":True,"data":copy, "crm" : file}
-    return {"success" : False, "error" : "Error in reading file"}
+    raise FileNotFoundError("File not found")
 
 
 #sort_crm not working
@@ -114,4 +117,5 @@ def sort_crm(file, new_file):
         print(sort)
         # rewrite_csv(file, new_file)
         return {"success": True, "data":sort}
+    raise FileNotFoundError("File not found")
 
