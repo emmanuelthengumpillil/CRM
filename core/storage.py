@@ -55,7 +55,8 @@ def get_next_id(file):
         crm = file["data"]
         try:
             if crm != []:
-                id_index = int(crm[-1]["Id"])
+                sorted_crm = sorted(crm["Id"])
+                id_index = int(sorted_crm[-1]["Id"])
                 return {"success":True, "data": id_index + 1, "crm" : file}
             return {"success":False, "error": "Csv is empty"}
         except IndexError:

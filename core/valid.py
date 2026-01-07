@@ -1,4 +1,3 @@
-import storage
 import re
 
 row = {"Name":"jkljk","Phone":"13213"}
@@ -64,7 +63,7 @@ def valid_file(file):
         with open(file, "r") as read_file:
             read_file.read()
             return {"success": True, "data": "File exists"}
-    except FileNotFoundError:
-        return {"success": True, "error": "File no found"}
-    except PermissionError:
-        return {"success": True, "error": "File Permission Denied"}
+    except FileNotFoundError as e:
+        raise FileNotFoundError(e)
+    except PermissionError as e:
+        raise PermissionError (e)
