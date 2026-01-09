@@ -46,43 +46,43 @@ def validate_row(file,row_dict):
         if validate_keys(file, row_dict):
             if validate_not_empty(row_dict):
                 return {"success": True, 
-                        "data": row_dict, 
-                        "error" : None}
+                    "data": row_dict, 
+                    "error" : None}
             return {"success": False, 
-                    "data": None, 
-                    "error" : "row_dict is empty"}
-        return {"success": False, 
                 "data": None, 
-                "error" : "Key is not valid"}
-    return {"success": False, 
+                "error" : "row_dict is empty"}
+        return {"success": False, 
             "data": None, 
-            "error" : "Row_data invalid"}
+            "error" : "Key is not valid"}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Row_data invalid"}
 
 
 def valid_name(name):
     if name == "":
         return {"success": False, 
-                "data": None, 
-                "error" : "Name is empty"}
+            "data": None, 
+            "error" : "Name is empty"}
     for letter in name:
         if not (str(letter).isalpha() or str(letter).isspace()):
             return {"success": False, 
-                    "data": None, 
-                    "error" : "Conatains invalid data type"}
+                "data": None, 
+                "error" : "Conatains invalid data type"}
     return {"success": True, 
-            "data": name, 
-            "error" : None}
+        "data": name, 
+        "error" : None}
 
 
 def valid_phone(phone):
     if str(phone).isdigit() and phone != "":
         if 10 <= len(phone) <= 12:
             return {"success": True, 
-                    "data": phone, 
-                    "error" : None}
+                "data": phone, 
+                "error" : None}
     return {"success": False, 
-            "data": None, 
-            "error" : "Phone number is not valid"}
+        "data": None, 
+        "error" : "Phone number is not valid"}
 
 
 def valid_file(file):
@@ -90,8 +90,8 @@ def valid_file(file):
         with open(file, "r") as read_file:
             read_file.read()
             return {"success": True, 
-                    "data": "File exists", 
-                    "error" : None}
+                "data": "File exists", 
+                "error" : None}
     except FileNotFoundError as e:
         raise FileNotFoundError(e)
     except PermissionError as e:
