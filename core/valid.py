@@ -7,24 +7,38 @@ f = "crm.csv"
 
 def valid_row_data(row_dict):
     if not isinstance(row_dict, dict):
-        return False
-    return True
+        return {"success": False, 
+            "data": None, 
+            "error" : "row data invalid"}
+    return {"success": True, 
+        "data": "Row data valid", 
+        "error" : None}
 
 
 def validate_keys(file, row_dict):
     header = file[1]
     if header == None:
-        return False
+        return {"success": False, 
+            "data": None, 
+            "error" : "Header is empty"}
     if set(header) != set(row_dict.keys()):
-        return False
-    return True
+        return {"success": False, 
+            "data": None, 
+            "error" : "Keys invalid"}
+    return {"success": True, 
+        "data": "Keys are valid", 
+        "error" : None}
 
 
 def validate_not_empty(row_dict):
     for i in row_dict.values():
         if i == "" or i == None:
-            return False
-    return True
+            return {"success": False, 
+                "data": None, 
+                "error" : "Row is empty"}
+    return {"success": True, 
+        "data": "Row not empty", 
+        "error" : None}
 
 
 def validate_row(file,row_dict):

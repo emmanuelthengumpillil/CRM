@@ -1,4 +1,4 @@
-import function
+import core.customer as customer
 import inpt
 import search
 import sys
@@ -20,7 +20,7 @@ def menu(file):
             sys.exit()
 
         if ch["data"] == "add":
-            add = function.add_person_crm(file)
+            add = customer.add_person_crm(file)
             if add["success"]:
                 print("Success")
             else:
@@ -32,19 +32,19 @@ def menu(file):
             else:
                 print(srch["error"])
         elif ch["data"] == "remove":
-            remove = function.remove_person_crm(file)
+            remove = customer.remove_person_crm(file)
             if remove["success"]:
                 print("Success")
             else:
                 print(remove["error"])
         elif ch["data"] == "update":
-            update = function.update_person_crm()
+            update = customer.update_person_crm()
             if update["success"]:
                 print("Success")
             else:
                 print(update["error"])
         elif ch["data"] == "view":
-            view = function.view_crm(file)
+            view = customer.view_crm(file)
             if view["success"]:
                 print("Success")
             else:

@@ -1,7 +1,7 @@
-import inpt
-import menu
-import storage
-import function
+import core.inpt as inpt
+# import core.menu as menu
+# import core.storage as storage
+# import core.function as functions
 
 
 file = inpt.get_file()["data"]

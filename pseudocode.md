@@ -32,3 +32,21 @@
     Calls input → logic → storage
     Handles exceptions
     Controls program flow
+
+Customer
+- id (int)
+- name (str)
+- phone (str)
+- email (str)
+- created_at (datetime)
+
+    Rules:
+
+ID is immutable
+
+All operations depend on ID
+
+Names are NOT identifiers
+
+No function should guess structure
+
