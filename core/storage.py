@@ -55,10 +55,12 @@ def get_next_id(file):
         crm = file["data"]
         try:
             if crm != []:
-                sorted_crm = sorted(crm["Id"])
-                id_index = int(sorted_crm[-1]["Id"])
-                return {"success":True, "data": id_index + 1, "crm" : file}
-            return {"success":False, "error": "Csv is empty"}
+                max_id = crm[1]
+                for i in crm["Id"]:
+                    if max_id < i:
+                        max_id = i
+                return {"success": True, "data": max_id + 1}
+            return {"success": True, "data": 0}
         except IndexError:
             raise IndexError("Index Error found")
     raise FileNotFoundError("File not found")
@@ -120,3 +122,6 @@ def sort_crm(file, new_file):
         return {"success": True, "data":sort}
     raise FileNotFoundError("File not found")
 
+
+l = []
+print(l[1])
