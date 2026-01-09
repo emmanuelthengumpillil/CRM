@@ -8,8 +8,12 @@ def bubble_sort_name(data):
             for j in range(0,l-i-1):
                 if data["data"][j]["Name"] > data["data"][j+1]["Name"]:
                     data["data"][j], data["data"][j + 1] = data["data"][j + 1], data["data"][j]
-        return{"success":True, "data": data["data"]}
-    return {"success": False, "data": None}
+        return {"success": True, 
+            "data": data["data"], 
+            "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't read crm"}
 
 
 def get_id_by_name(data):
@@ -18,9 +22,15 @@ def get_id_by_name(data):
         sorted_data = bubble_sort_name(data)["data"]
         for i in range(len(sorted_data)):
             if user_name == sorted_data[i]["Name"].lower():
-                return {"success": True, "data": sorted_data[i]["Id"]}
-        return {"success": False, "error": "--Name not found--"}
-    return {"success": False, "error": "Couldn't get user_id"}
+                return {"success": True, 
+                    "data": sorted_data[i]["Id"], 
+                    "error" : None}
+        return {"success": False, 
+                    "data": None, 
+                    "error" : "--Name not found--"}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't get user_id"}
 
 
 def get_id_by_phone(data):
@@ -28,8 +38,14 @@ def get_id_by_phone(data):
     if data["success"]:
         for i in range(len(data["data"])):
             if phone == data["data"][i]["Phone"]:
-                return {"success": True, "data": data["data"][i]["Id"]}
-        return {"success": False, "error" :"Phone no not found"}
-    return {"success": False, "error": "Couldn't read crm"}
+                return {"success": True, 
+                    "data": data["data"][i]["Id"], 
+                    "error" : None}
+        return {"success": False, 
+            "data": None, 
+            "error" : "Phone no not found"}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't read crm"}
 
 
