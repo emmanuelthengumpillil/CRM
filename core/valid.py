@@ -12,7 +12,7 @@ def valid_row_data(row_dict):
 
 
 def validate_keys(file, row_dict):
-    header = file["header"]
+    header = file[1]
     if header == None:
         return False
     if set(header) != set(row_dict.keys()):
@@ -31,38 +31,53 @@ def validate_row(file,row_dict):
     if valid_row_data(row_dict):
         if validate_keys(file, row_dict):
             if validate_not_empty(row_dict):
-                return {"success": True, "data": row_dict}
-            return {"success": False, "error": "row_dict is empty"}
-        return {"success": False, "error": "key is not valid"}
-    return {"success": False, "error": "row_data invalid"}
+                return {"success": True, 
+                        "data": row_dict, 
+                        "error" : None}
+            return {"success": False, 
+                    "data": None, 
+                    "error" : "row_dict is empty"}
+        return {"success": False, 
+                "data": None, 
+                "error" : "Key is not valid"}
+    return {"success": False, 
+            "data": None, 
+            "error" : "Row_data invalid"}
 
 
 def valid_name(name):
     if name == "":
-        return {"success":False,"error": "name is empty"}
-    
+        return {"success": False, 
+                "data": None, 
+                "error" : "Name is empty"}
     for letter in name:
         if not (str(letter).isalpha() or str(letter).isspace()):
-            return {"success": False, "error" : "Contains invalid data type"}
-    return {"success": True, "data": name}
+            return {"success": False, 
+                    "data": None, 
+                    "error" : "Conatains invalid data type"}
+    return {"success": True, 
+            "data": name, 
+            "error" : None}
 
 
 def valid_phone(phone):
     if str(phone).isdigit() and phone != "":
         if 10 <= len(phone) <= 12:
-            return {"success":True,"data": phone}
-    return {"success": False, "error": "Phone Number is not valid"}
-
-
-def valid_email(email):
-    pass
+            return {"success": True, 
+                    "data": phone, 
+                    "error" : None}
+    return {"success": False, 
+            "data": None, 
+            "error" : "Phone number is not valid"}
 
 
 def valid_file(file):
     try:
         with open(file, "r") as read_file:
             read_file.read()
-            return {"success": True, "data": "File exists"}
+            return {"success": True, 
+                    "data": "File exists", 
+                    "error" : None}
     except FileNotFoundError as e:
         raise FileNotFoundError(e)
     except PermissionError as e:
