@@ -1,4 +1,4 @@
-import core.customer as customer
+import customer
 import inpt
 import search
 import sys
