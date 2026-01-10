@@ -13,9 +13,15 @@ def is_duplicate(file,row_list):
         for row in crm:
             phone = row["Phone"]
             if row_list["Phone"] == phone:
-                return {"success":False, "msg":"duplicate of list is found","location":"isduplicate"}
-        return {"success":True, "data":row_list, "location":"isduplicate"}
-    return {"success":False, "msg":"Couldn't read csv","location":"isduplicate"}
+                return {"success": False, 
+                    "data": None, 
+                    "error" : "duplicate of list is found"}
+        return {"success": True, 
+            "data": row_list, 
+            "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't read csv"}
 
 
 def create_row_dict(file):
@@ -32,8 +38,12 @@ def create_row_dict(file):
                     values = [result_id["data"], name, phone]
                     row_dict = dict(zip(keys, values))
                 if valid.validate_row(file, row_dict)["success"]:
-                    return {"success":True, "data": row_dict, "location":"create_row_dict"}
-                return {"success":False, "error": "Created row_dict invalid", "location":"create_row_dict"}
+                    return {"success": True, 
+                        "data": row_dict, 
+                        "error" : None}
+                return {"success": False, 
+                    "data": None, 
+                    "error" : "Created row_dict invalid"}
             else:
                 n_id = storage.get_next_id(file)
                 if n_id != None:
@@ -41,10 +51,18 @@ def create_row_dict(file):
                         values = [n_id["data"], name, phone]
                         row_dict = dict(zip(keys, values))
                     if valid.validate_row(file, row_dict)["success"]:
-                        return {"success":True, "data": row_dict, "crm":crm, "location":"create_row_dict"}
-                    return {"success":False, "error": "Created row_dict invalid", "location":"create_row_dict"}
-        return {"success":False, "error":"Csv/Header is empty", "location":"create_row_dict"}
-    return {"success":False, "msg":"Couldn't read csv", "location":"create_row_dict"}
+                        return {"success": True, 
+                            "data": row_dict, 
+                            "error" : None}
+                    return {"success": False, 
+                        "data": None, 
+                        "error" : "Created row_dict invalid"}
+        return {"success": False, 
+            "data": None, 
+            "error" : "Csv/Header is empty"}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't read csv"}
 
 
 def add_person_crm(file, name, phone):
@@ -54,9 +72,15 @@ def add_person_crm(file, name, phone):
         duplicate = is_duplicate(file,data)
         if duplicate["success"]:
             storage.write_csv(file, data)
-            return {"success":True, "msg":"Successfully added person", "location":"add_person"}
-        return {"success":True, "data":data, "location":"add_person"}
-    return {"success":False, "error":"Couldn't add person", "location":"add_person"}
+            return {"success": True, 
+                "data": "Successfully added person", 
+                "error" : None}
+        return {"success": True, 
+            "data": data, 
+            "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Couldn't add person"}
 
 
 def remove_person_crm(file):
@@ -70,8 +94,12 @@ def remove_person_crm(file):
                     new_row.append(row)
             print(new_row)
             storage.rewrite_csv(file,file,new_row)
-            return {"success":True, "data":new_row, "location":"remove_person"}
-    return {"success": False, "error": "File not found", "location":"remove_person"}
+            return {"success": True, 
+                "data": new_row, 
+                "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "File not found"}
 
 
 def create_duplicate_file(old_file, new_file):
@@ -85,7 +113,11 @@ def view_crm(file):
     if x["success"]:
         for lt in x["data"]:
             print(lt)
-            return {"success": True}
+            return {"success": True, 
+                "data": "Successfully loaded crm", 
+                "error" : None}
     else:
-        return{"success": False}
+        return {"success": False, 
+            "data": None, 
+            "error" : "Couldn't read crm"}
 
