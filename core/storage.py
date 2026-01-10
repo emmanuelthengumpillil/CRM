@@ -45,17 +45,16 @@ def write_csv(file, rows):
         raise UnicodeEncodeError(e)
 
 
-def rewrite_csv(old_file,new_file, new_row):
-    old_crm = old_file["file_name"]
-    old_header = old_file["header"]
-    with open(new_file, "w", newline='') as write_file:
-        writer = csv.DictWriter(write_file, fieldnames=old_header)
-        writer.writeheader()
-        for row in new_row:
-            writer.writerow(row)
-        return {"success": True, 
-            "data": "Crm rewritten", 
-            "error" : None}
+# def rewrite_csv(old_file, new_file, new_row):
+#     header = old_file["header"]
+#     with open(new_file, "w", newline='') as write_file:
+#         writer = csv.DictWriter(write_file, fieldnames=header)
+#         writer.writeheader()
+#         for row in new_row:
+#             writer.writerow(row)
+#         return {"success": True, 
+#             "data": "Crm rewritten", 
+#             "error" : None}
 
 
 def duplicate_csv(old_file,new_file):
@@ -89,50 +88,46 @@ def get_next_id(file):
 
 
 def get_current_id(file, name, phone):
-    if file["success"] == True:
-        crm = file["data"]
-        try:
-            if crm != []:
-                for row in crm:
-                    if row["Name"] == name and row["Phone"] == phone:
-                        return {"success": True, 
-                            "data": row["Id"], 
-                            "error" : None}
-            return {"success": False, 
-                "data": None, 
-                "error" : "CRM is empty"}
-        except IndexError:
-            raise IndexError("Index Error found")
-    raise FileNotFoundError("File not found")
+    crm = file["data"]
+    if crm != []:
+        for row in crm:
+            if row["Name"] == name and row["Phone"] == phone:
+                return {"success": True, 
+                    "data": row["Id"], 
+                    "error" : None}
+    return {"success": True, 
+        "data": 0, 
+        "error" : None}
 
 
 def find_row_by_id(file, user_id):
-    if file["success"] == True:
-        crm = file["data"]
-        if str(user_id).isdigit():
-            for row in crm:
-                if row["Id"] == user_id:
-                    return {"success": True, 
-                        "data": row, 
-                        "error" : None}
-        raise ValueError ("invalid data type")
-    raise FileNotFoundError("File not found")
+    crm = file["data"]
+    if str(user_id).isdigit():
+        for row in crm:
+            if crm["Id"] == user_id:
+                return {"success": True,
+                    "data": row,
+                    "error": None}
+            else:
+                return {"success": False,
+                    "data": "User_id not in crm",
+                    "error": None}
+    raise ValueError ("invalid data type")
 
 
 def load_all(file):
     copy = []
-    if file["success"] == True:
-        crm = file["data"]
-        header = file["header"]
-        if header != None:
-            copy.append(header)
-        for row in crm:
-            row_list = list(row.values())
-            copy.append(row_list)
-        return {"success": True, 
-            "data": copy, 
-            "error" : None}
-    raise FileNotFoundError("File not found")
+    crm = file["data"]
+    header = file["header"]
+    if header != None:
+        copy.append(header)
+    for row in crm:
+        row_list = list(row.values())
+        copy.append(row_list)
+    return {"success": True, 
+        "data": copy, 
+        "error" : None}
+
 
 
 def sort_crm(file, new_file):
