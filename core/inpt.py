@@ -5,7 +5,9 @@ def get_name():
     while True:
         name = input("Enter Name:- ")
         if valid.valid_name(name)["success"]:
-            return {"success":True, "data":name}
+            return {"success": True, 
+                "data": name, 
+                "error" : None}
         print("Enter alphabet values")
 
 
@@ -13,21 +15,27 @@ def get_phone():
     while True:
         phone = input("Enter Phone:- ")
         if valid.valid_phone(phone)["success"]:
-            return {"success":True, "data": phone}
+            return {"success": True, 
+                "data": phone, 
+                "error" : None}
 
 
 def get_id():
     while True:
         id = input("Enter ID:- ")
         if id.isdigit():
-            return {"success":True, "data": id}
+            return {"success": True, 
+                "data": id, 
+                "error" : None}
 
 
 def get_input():
     name = get_name()["data"]
     phone = get_phone()["data"]
     list = [name,phone]
-    return {"success":True, "data": list}
+    return {"success": True, 
+        "data": list, 
+        "error" : None}
 
 
 def get_choice():
@@ -38,10 +46,14 @@ def get_choice():
         except KeyboardInterrupt:
             print()
             print("--Application Ended--")
-            return {"success": False, "error": "user forced exit"}
+            return {"success": False, 
+                "data": None, 
+                "error" : "user forced exit"}
         for i in range(len(ch)):
             if choice == ch[i]:
-                return {"success":True, "data": choice}
+                return {"success": True, 
+                    "data": choice, 
+                    "error" : None}
             elif choice == "exit":
                 sys.exit()
         print("-- Please enter among the following choices --")
@@ -51,4 +63,6 @@ def get_file():
     while True:
         file = input("get file name:- ")
         if valid.valid_file(file)["success"]:
-            return {"success": True, "data": file}
+            return {"success": True, 
+                "data": file, 
+                "error" : None}
