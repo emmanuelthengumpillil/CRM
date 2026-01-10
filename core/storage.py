@@ -115,7 +115,7 @@ def find_row_by_id(file, user_id):
     raise ValueError ("invalid data type")
 
 
-def load_all(file):
+def load_all_table(file):
     copy = []
     crm = file["data"]
     header = file["header"]
@@ -128,22 +128,4 @@ def load_all(file):
         "data": copy, 
         "error" : None}
 
-
-
-def sort_crm(file, new_file):
-    crm = file
-    if crm["success"]:
-        sort = []
-        for row1 in crm["data"]:
-            r1 = row1["Name"]
-            for row2 in crm["data"]:
-                r2 = row2["Name"]
-                if r1 > r2:
-                    r1, r2 = r2, r1
-            sort.append(r1)
-        print(sort)
-        return {"success": True, 
-            "data": sort, 
-            "error" : None}
-    raise FileNotFoundError("File not found")
 
