@@ -46,19 +46,26 @@ def write_csv(file, rows):
 
 
 def rewrite_csv(old_file,new_file, new_row):
-    old_result = read_csv(old_file)
-    if old_result["success"] == True:
-        old_crm = old_result["data"]
-        old_header = old_result["header"]
-        with open(new_file, "w", newline='') as write_file:
-            writer = csv.DictWriter(write_file, fieldnames=old_header)
-            writer.writeheader()
-            for row in new_row:
-                writer.writerow(row)
-            return {"success": True, 
-                "data": "Crm rewritten", 
-                "error" : None}
-    raise FileNotFoundError("File not found")
+    old_crm = old_file["file_name"]
+    old_header = old_file["header"]
+    with open(new_file, "w", newline='') as write_file:
+        writer = csv.DictWriter(write_file, fieldnames=old_header)
+        writer.writeheader()
+        for row in new_row:
+            writer.writerow(row)
+        return {"success": True, 
+            "data": "Crm rewritten", 
+            "error" : None}
+
+
+def duplicate_csv(old_file,new_file):
+    crm = old_file["data"]
+    old_header = old_file["header"]
+    with open(new_file, "w", newline="") as write_file:
+        writer = csv.DictWriter(write_file, fieldnames = old_header)
+        writer.writeheader()
+        for i in crm:
+            writer.writerow(i)
 
 
 def get_next_id(file):
