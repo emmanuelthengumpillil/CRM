@@ -3,6 +3,7 @@ import csv
 
 def read_csv(file):
     crm_list = []
+    file_name = file
     try:
         with open(file,'r',newline='') as reading_file:
             reader = csv.DictReader(reading_file)
@@ -14,7 +15,9 @@ def read_csv(file):
             for row in reader:
                 crm_list.append(row)
             return {"success": True, 
-                "data": [crm_list, header], 
+                "data": crm_list,
+                "header": header,
+                "file_name" : file_name,
                 "error" : None}
     except (FileNotFoundError) as e:
         raise FileNotFoundError(e)
@@ -25,22 +28,21 @@ def read_csv(file):
 
 
 def write_csv(file, rows):
-    if file["success"] == True:
-        header = file["header"]
-        try:
-            with open(file,"a",newline = '') as append_file:
-                writer = csv.DictWriter(append_file, fieldnames=header)
-                writer.writerow(rows)
-                return {"success": True, 
-                    "data": "Succesfully written crm", 
-                    "error" : None}
-        except (FileNotFoundError) as e:
-            raise FileNotFoundError(e)
-        except (PermissionError) as e:
-            raise PermissionError(e)
-        except (UnicodeEncodeError) as e:
-            raise UnicodeEncodeError(e)
-    raise FileNotFoundError("File not found")
+    header = file["header"]
+    file_name = file["file_name"]
+    try:
+        with open(file_name,"a",newline = '') as append_file:
+            writer = csv.DictWriter(append_file, fieldnames=header)
+            writer.writerow(rows)
+            return {"success": True, 
+                "data": "Succesfully written crm", 
+                "error" : None}
+    except (FileNotFoundError) as e:
+        raise FileNotFoundError(e)
+    except (PermissionError) as e:
+        raise PermissionError(e)
+    except (UnicodeEncodeError) as e:
+        raise UnicodeEncodeError(e)
 
 
 def rewrite_csv(old_file,new_file, new_row):
