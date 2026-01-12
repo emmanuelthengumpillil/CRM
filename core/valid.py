@@ -87,12 +87,11 @@ def valid_phone(phone):
 
 
 def valid_file(file):
-    while True:
-        if os.path.exists(file):
-            return {"success": True, 
-                "data": "File exist", 
-                "error" : None}
-        else:
-            return {"success": False, 
-                "data": "File doesnot exist", 
-                "error" : None}
+    if os.path.exists(file):
+        return {"success": True, 
+            "data": "File exist", 
+            "error" : None}
+    else:
+        return {"success": False, 
+            "data": "File doesnot exist", 
+            "error" : None}
