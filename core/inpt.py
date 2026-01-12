@@ -39,7 +39,6 @@ def get_input():
 
 
 def get_choice():
-    ch = ["add","remove","update","search","view"]
     while True:
         try:
             choice = input("ADD / REMOVE / UPDATE / SEARCH / VIEW / EXIT:- ").lower()
@@ -49,13 +48,11 @@ def get_choice():
             return {"success": False, 
                 "data": None, 
                 "error" : "user forced exit"}
-        for i in range(len(ch)):
-            if choice == ch[i]:
-                return {"success": True, 
-                    "data": choice, 
-                    "error" : None}
-            elif choice == "exit":
-                sys.exit()
+        if choice in ["add","remove","update","delete","exit","duplicate","view"]:
+            return {"success": True, 
+                "data": choice, 
+                "error" : None}
+
         print("-- Please enter among the following choices --")
 
 

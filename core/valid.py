@@ -17,7 +17,7 @@ def valid_row_data(row_dict):
 
 
 def validate_keys(file, row_dict):
-    header = file[1]
+    header = file["header"]
     if header == None:
         return {"success": False, 
             "data": None, 

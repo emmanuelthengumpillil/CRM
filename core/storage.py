@@ -72,10 +72,12 @@ def get_next_id(file):
         crm = file["data"]
         try:
             if crm != []:
-                max_id = crm[1]
-                for i in crm["Id"]:
-                    if max_id < i:
-                        max_id = i
+                max_id = int(crm[-1]["Id"])
+
+                # for i in crm:
+                #     for j in crm[i]["Id"]:
+                #         if max_id < j:
+                #             max_id = j
                 return {"success": True, 
                     "data": max_id + 1, 
                     "error" : None}
@@ -95,8 +97,8 @@ def get_current_id(file, name, phone):
                 return {"success": True, 
                     "data": row["Id"], 
                     "error" : None}
-    return {"success": True, 
-        "data": 0, 
+    return {"success": False, 
+        "data": None, 
         "error" : None}
 
 
