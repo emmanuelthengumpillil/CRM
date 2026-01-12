@@ -1,4 +1,5 @@
 import re
+import os
 
 row = {"Name":"jkljk","Phone":"13213"}
 row2 = {"Phone":"132465","Name":"qweqw"}
@@ -86,13 +87,12 @@ def valid_phone(phone):
 
 
 def valid_file(file):
-    try:
-        with open(file, "r") as read_file:
-            read_file.read()
+    while True:
+        if os.path.exists(file):
             return {"success": True, 
-                "data": "File exists", 
+                "data": "File exist", 
                 "error" : None}
-    except FileNotFoundError as e:
-        raise FileNotFoundError(e)
-    except PermissionError as e:
-        raise PermissionError (e)
+        else:
+            return {"success": False, 
+                "data": "File doesnot exist", 
+                "error" : None}
