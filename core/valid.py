@@ -1,4 +1,3 @@
-import re
 import os
 
 row = {"Name":"jkljk","Phone":"13213"}
