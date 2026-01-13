@@ -20,10 +20,8 @@ def is_duplicate(file,row_list):
 
 
 def create_row_dict(file, name, phone):
-    # header and keys same
     if file["success"]:
         if file["data"] != []:
-            crm = file["data"]
             header = file["header"] 
             result_id = storage.get_current_id(file, name, phone)
             if result_id["success"]:
@@ -55,7 +53,6 @@ def create_row_dict(file, name, phone):
             "error" : "Couldn,t read file"}
 
 
-# COMPLETE
 def add_person_crm(file, name, phone):
     row = create_row_dict(file, name, phone)
     if row["success"]:
@@ -95,8 +92,19 @@ def remove_person_crm(old_file, new_file, name, phone):
 
 def create_duplicate_file(old_file, new_file):
     if old_file["success"]:
-        write_result = storage.rewrite_csv(old_file,new_file)
-        print(write_result)
+        crm_copy = old_file["data"]
+        write_result = storage.rewrite_csv(old_file,new_file, crm_copy)
+        if write_result["success"]:
+            return {"success": True,
+                "data": write_result,
+                "error": None}
+        return {"success": False,
+            "data": None,
+            "error": "Couldn't rewrite crm"}
+    return {"success": False,
+        "data": None,
+        "error": "Couldn't read old_file"}
+
 
 
 def view_crm(file):
