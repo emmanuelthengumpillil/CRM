@@ -120,16 +120,3 @@ def find_row_by_id(file, user_id):
     raise ValueError ("invalid data type")
 
 
-def load_all_table(file):
-    copy = []
-    crm = file["data"]
-    header = file["header"]
-    if header != None:
-        copy.append(header)
-    for row in crm:
-        row_list = list(row.values())
-        copy.append(row_list)
-    return {"success": True, 
-        "data": copy, 
-        "error" : None}
-

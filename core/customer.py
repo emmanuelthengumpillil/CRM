@@ -106,15 +106,13 @@ def create_duplicate_file(old_file, new_file):
         "error": "Couldn't read old_file"}
 
 
-
 def view_crm(file):
-    x = storage.load_all_table(file)
-    if x["success"]:
-        for lt in x["data"]:
-            print(lt)
-            return {"success": True, 
-                "data": "Successfully loaded crm", 
-                "error" : None}
+    if file["success"]:
+        for lst in file["data"]:
+            print(lst)
+        return {"success": True, 
+            "data": "Successfully loaded crm", 
+            "error" : None}
     else:
         return {"success": False, 
             "data": None, 
