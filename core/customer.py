@@ -1,10 +1,5 @@
 import storage
 import valid
-import inpt
-
-f = "data\\crm.csv"
-row1 = {"Name": "hello", "Phone" : "1234567890"}
-row2 = {"Phone" : "1234567890", "Name": "hello"}
 
 
 def is_duplicate(file,row_list):
@@ -79,18 +74,17 @@ def add_person_crm(file, name, phone):
         "error" : "Couldn't add person"}
 
 
-def remove_person_crm(file, name, phone):
+def remove_person_crm(old_file, new_file, name, phone):
     new_row = []
-    if file["success"]:
-        # row_result = create_row_dict(file)
-        # if row_result["success"]:
-            # row_to_be_deleted = 
-        for row in file["data"]:
-            if row["Name"] == name:
-                
-                new_row.append(row)
+    if old_file["success"]:
+        row_result = create_row_dict(old_file, name, phone)
+        print(row_result)
+        if row_result["success"]:
+            for row in old_file["data"]:
+                if row["Name"] != row_result["data"]["Name"]:
+                    new_row.append(row)
         print(new_row)
-        storage.rewrite_csv(file,file,new_row)
+        storage.rewrite_csv(old_file,new_file,new_row)
         return {"success": True, 
             "data": new_row, 
             "error" : None}

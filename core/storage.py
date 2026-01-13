@@ -45,17 +45,20 @@ def write_csv(file, rows):
         raise UnicodeEncodeError(e)
 
 
-# def rewrite_csv(old_file, new_file, new_row):
-#     header = old_file["header"]
-#     with open(new_file, "w", newline='') as write_file:
-#         writer = csv.DictWriter(write_file, fieldnames=header)
-#         writer.writeheader()
-#         for row in new_row:
-#             writer.writerow(row)
-#         return {"success": True, 
-#             "data": "Crm rewritten", 
-#             "error" : None}
-
+def rewrite_csv(old_file, new_file, new_row):
+    if old_file["data"] != []:
+        header = old_file["header"]
+        with open(new_file, "w", newline='') as write_file:
+            writer = csv.DictWriter(write_file, fieldnames=header)
+            writer.writeheader()
+            for row in new_row:
+                writer.writerow(row)
+            return {"success": True, 
+                "data": "Crm rewritten", 
+                "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "old_file is empty"}
 
 def duplicate_csv(old_file,new_file):
     crm = old_file["data"]
@@ -129,5 +132,4 @@ def load_all_table(file):
     return {"success": True, 
         "data": copy, 
         "error" : None}
-
 
