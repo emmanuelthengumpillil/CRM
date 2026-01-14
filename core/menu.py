@@ -24,7 +24,7 @@ while True:
             if not phone_res["success"]:
                 print(phone_res["error"])
                 sys.exit()
-            add = customer.add_person_crm(storage.read_csv(path_file), name_res["data"], phone_res["data"])
+            add = customer.add_person_crm(storage.read_csv(path_file["data"]), name_res["data"], phone_res["data"])
             if add["success"]:
                 print("Success")
             else:
@@ -39,7 +39,7 @@ while True:
             if not phone_res["success"]:
                 print(phone_res["error"])
                 sys.exit()
-            remove = customer.remove_person_crm(storage.read_csv(path_file), path_file, name_res["data"], phone_res["data"])
+            remove = customer.remove_person_crm(storage.read_csv(path_file["data"]), path_file, name_res["data"], phone_res["data"])
             if remove["success"]:
                 print("Success")
             else:
@@ -47,7 +47,7 @@ while True:
 
 # To be completed
         elif choice in ("search","s"):
-            srch = search.get_id_by_name(crm_file)
+            srch = search.get_id_by_name()
             if srch["success"]:
                 print("Success")
             else:
@@ -55,14 +55,14 @@ while True:
 
 # To be completed
         elif choice in ("update","u"):
-            update = customer.update_person_crm(crm_file)
+            update = customer.update_person_crm(path_file)
             if update["success"]:
                 print("Success")
             else:
                 print(update["error"])
 
         elif choice in ("view","v"):
-            view = customer.view_crm(storage.read_csv(path_file))
+            view = customer.view_crm(storage.read_csv(path_file["data"]))
             if view["success"]:
                 print("Success")
             else:
