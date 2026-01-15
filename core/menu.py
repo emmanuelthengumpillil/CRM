@@ -8,7 +8,9 @@ print("Welome to terminal crm")
 
 path_file = inpt.get_file()
 if path_file["success"] == False:    
-    print("Invlid File")
+    print("Invalid File")
+    sys.exit()
+
 
 while True:
     ch = inpt.get_choice()
@@ -45,17 +47,21 @@ while True:
             else:
                 print(remove["error"])
 
-# To be completed
         elif choice in ("search","s"):
-            srch = search.get_id_by_name()
+            name_res = inpt.get_name()
+            srch = search.find_row_by_name(storage.read_csv(path_file["data"]), name_res["data"])
+            if not name_res["success"]:
+                print(name_res["error"])
+                sys.exit()
             if srch["success"]:
                 print("Success")
+                print(srch["data"])
             else:
                 print(srch["error"])
 
 # To be completed
         elif choice in ("update","u"):
-            update = customer.update_person_crm(path_file)
+            update = customer.update_person_crm(storage.read_csv(path_file["data"]))
             if update["success"]:
                 print("Success")
             else:
