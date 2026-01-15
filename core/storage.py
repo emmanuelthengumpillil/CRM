@@ -11,6 +11,7 @@ def read_csv(file):
             if header == None or header == "" or header == []:
                 return {"success": False, 
                     "data" : "Header is missing", 
+                    "file_name" : file_name,
                     "error" : "File is empty"}
             for row in reader:
                 crm_list.append(row)
@@ -27,13 +28,13 @@ def read_csv(file):
         raise UnicodeEncodeError(e)
 
 
-def write_csv(file, rows):
+def write_csv(file, row):
     header = file["header"]
     file_name = file["file_name"]
     try:
         with open(file_name,"a",newline = '') as append_file:
             writer = csv.DictWriter(append_file, fieldnames=header)
-            writer.writerow(rows)
+            writer.writerow(row)
             return {"success": True, 
                 "data": "Succesfully written crm", 
                 "error" : None}
@@ -59,6 +60,7 @@ def rewrite_csv(old_file, new_file, new_row):
     return {"success": False, 
         "data": None, 
         "error" : "old_file is empty"}
+
 
 def duplicate_csv(old_file,new_file):
     crm = old_file["data"]
