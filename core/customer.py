@@ -1,5 +1,6 @@
 import storage
 import valid
+import search
 
 
 def is_duplicate(file,row_list):
@@ -75,13 +76,11 @@ def remove_person_crm(old_file, new_file, name, phone):
     new_row = []
     if old_file["success"]:
         row_result = create_row_dict(old_file, name, phone)
-        print(row_result)
         if row_result["success"]:
             for row in old_file["data"]:
                 if row["Name"] != row_result["data"]["Name"]:
                     new_row.append(row)
-        print(new_row)
-        storage.rewrite_csv(old_file,new_file,new_row)
+        storage.rewrite_csv(old_file, new_file, new_row)
         return {"success": True, 
             "data": new_row, 
             "error" : None}
@@ -119,3 +118,30 @@ def view_crm(file):
             "error" : "Couldn't read crm"}
 
 
+def update_person_crm(file, old_name, new_name, phone):
+    file_name = file["file_name"]
+    if file["success"]:
+        search_name = search.find_row_by_name(file, old_name)
+        if search_name["success"]:
+            phno = search_name["data"]["Phone"]
+            rem = remove_person_crm(file, file_name, old_name, phno)
+            add = add_person_crm(file, new_name, phno)
+            if add["success"]:
+                return{"success": True,
+                    "data": add["data"],
+                    "error": None} 
+            return{"success": False,
+                "data": None,
+                "error": "Couldn't add person"}
+        else:
+            add = add_person_crm(file, new_name, phone)
+            if add["success"]:
+                return{"success": True,
+                    "data": add["data"],
+                    "error": None} 
+        return{"success": False,
+            "data": None,
+            "error": None} 
+    return{"success": False,
+        "data": None,
+        "error": None}
