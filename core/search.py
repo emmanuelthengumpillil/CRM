@@ -2,16 +2,18 @@ import storage
 import inpt
 
 
-def get_id_by_name(data,user_name):
-    for i in range(len(data["data"])):
-        if (data["data"][i]["Name"].lower()) == user_name:
-            return {"success": True, 
-                "data": data["data"][i]["Id"], 
-                "error" : None}
-        else:
-            return {"success": False, 
-                "data": None, 
-                "error" : "Name not found"}
+def find_row_by_name(data,user_name):
+    if data["success"]:
+        for i in data["data"]:
+            # USE PRINT TO CHECK THE TYPE OF SORT
+            # print(i)
+            if i["Name"] in user_name:
+                return {"success": True, 
+                    "data": i, 
+                    "error" : None}
+    return {"success": False, 
+        "data": None, 
+        "error" : "Name not found"}
 
 
 
