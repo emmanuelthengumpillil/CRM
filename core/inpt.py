@@ -65,7 +65,7 @@ def get_choice():
             return {"success": False, 
                 "data": None, 
                 "error" : "user forced exit"}
-        if choice in ["add","remove","update","delete","duplicate","view","a","r","u","d","v","e","q"]:
+        if choice in ["add","remove","update","delete","duplicate","search","view","a","r","u","d","v","s","e","q"]:
             return {"success": True, 
                 "data": choice, 
                 "error" : None}
