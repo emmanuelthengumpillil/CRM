@@ -38,9 +38,9 @@ def validate_not_empty(row_dict):
 
 
 def validate_row(file,row_dict):
-    if valid_row_data(row_dict):
-        if validate_keys(file, row_dict):
-            if validate_not_empty(row_dict):
+    if valid_row_data(row_dict)["success"]:
+        if validate_keys(file, row_dict)["success"]:
+            if validate_not_empty(row_dict)["success"]:
                 return {"success": True, 
                     "data": row_dict, 
                     "error" : None}

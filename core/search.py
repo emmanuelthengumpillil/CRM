@@ -18,10 +18,10 @@ def find_id_by_phone(data, phone):
             return {"success": True, 
                 "data": data["data"][i]["Id"], 
                 "error" : None}
-        else:
-            return {"success": False, 
-                "data": None, 
-                "error" : "Phone no not found"}
+    else:
+        return {"success": False, 
+            "data": None, 
+            "error" : "Phone no not found"}
 
 
 def get_next_id(file):
