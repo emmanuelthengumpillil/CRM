@@ -1,9 +1,5 @@
 import os
 
-row = {"Name":"jkljk","Phone":"13213"}
-row2 = {"Phone":"132465","Name":"qweqw"}
-f = "crm.csv"
-
 
 def valid_row_data(row_dict):
     if not isinstance(row_dict, dict):
@@ -75,10 +71,10 @@ def valid_name(name):
 
 
 def valid_phone(phone):
-    if str(phone).isdigit() and phone != "":
-        if 10 <= len(phone) <= 12:
+    if str(phone).isdigit() and str(phone) != "":
+        if 10 <= len(str(phone)) <= 12:
             return {"success": True, 
-                "data": phone, 
+                "data": str(phone), 
                 "error" : None}
     return {"success": False, 
         "data": None, 
