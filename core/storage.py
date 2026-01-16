@@ -90,7 +90,7 @@ def get_next_id(file):
     raise FileNotFoundError("File not found")
 
 
-def get_current_id(file, name, phone):
+def get_current_id(file, name, phone: str):
     crm = file["data"]
     if crm != []:
         for row in crm:
@@ -107,14 +107,13 @@ def find_row_by_id(file, user_id):
     crm = file["data"]
     if str(user_id).isdigit():
         for row in crm:
-            if crm["Id"] == user_id:
+            if row["Id"] == str(user_id):
                 return {"success": True,
                     "data": row,
                     "error": None}
-            else:
-                return {"success": False,
-                    "data": "User_id not in crm",
-                    "error": None}
+        else:
+            return {"success": False,
+                "data": "User_id not in crm",
+                "error": None}
     raise ValueError ("invalid data type")
-
 
