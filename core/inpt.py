@@ -28,6 +28,7 @@ def get_phone():
                 "data": None, 
                 "error" : "\nGet phone gone wrong"}
 
+
 def get_id():
     while True:
         try:
@@ -52,7 +53,7 @@ def get_input():
             "error" : None}
     return {"success": False, 
         "data": None, 
-        "error" : "Get name gone wrong"}
+        "error" : "Get input gone wrong"}
 
 
 def get_choice():
