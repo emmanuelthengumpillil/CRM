@@ -24,7 +24,7 @@ def create_row_dict(file, name, phone):
     if file["success"]:
         if file["data"] != []:
             header = file["header"] 
-            result_id = storage.get_current_id(file, name, phone)
+            result_id = search.get_current_id(file, name, phone)
             if result_id["success"]:
                 values = [result_id["data"], name, phone]
                 row_dict = dict(zip(header, values))
@@ -36,7 +36,7 @@ def create_row_dict(file, name, phone):
                     "data": None, 
                     "error" : "Created row_dict invalid"}
             else:
-                next_id = storage.get_next_id(file)
+                next_id = search.get_next_id(file)
                 values = [next_id["data"], name, phone]
                 row_dict = dict(zip(header, values))
                 if valid.validate_row(file, row_dict)["success"]:
