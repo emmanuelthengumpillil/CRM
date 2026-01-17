@@ -1,5 +1,5 @@
 import os
-
+import re
 
 def valid_row_data(row_dict):
     if not isinstance(row_dict, dict):
@@ -81,12 +81,25 @@ def valid_phone(phone):
         "error" : "Phone number is not valid"}
 
 
+def valid_email(email):
+    if re.search(r"^[^0-9@\s]+@[^0-9@\s]+\.com$", email):
+        return {"success": True, 
+            "data": email, 
+            "error" : None}
+    else:
+        return {"success": False, 
+            "data": None, 
+            "error" : "Invalid Email"}
+
+
 def valid_file(file):
     if os.path.exists(file):
         return {"success": True, 
-            "data": "File exist", 
+            "data": file, 
             "error" : None}
     else:
         return {"success": False, 
             "data": "File doesnot exist", 
             "error" : None}
+
+print(valid_email("asds@gmail.com"))
