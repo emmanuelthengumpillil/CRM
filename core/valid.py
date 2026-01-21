@@ -1,6 +1,7 @@
 import os
 import re
 
+
 def valid_row_data(row_dict):
     if not isinstance(row_dict, dict):
         return {"success": False, 
@@ -61,7 +62,7 @@ def valid_name(name):
             "data": None, 
             "error" : "Name is empty"}
     for letter in name:
-        if not (str(letter).isalpha() or str(letter).isspace()):
+        if (str(letter).isalpha() or str(letter).isspace()) == False:
             return {"success": False, 
                 "data": None, 
                 "error" : "Conatains invalid data type"}
@@ -101,5 +102,3 @@ def valid_file(file):
         return {"success": False, 
             "data": "File doesnot exist", 
             "error" : None}
-
-print(valid_email("asds@gmail.com"))

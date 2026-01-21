@@ -84,6 +84,9 @@ def get_file():
                 return {"success": True, 
                     "data": file, 
                     "error" : None}
+            return {"success": True, 
+                "data": file, 
+                "error" : None}
         except KeyboardInterrupt:
             return {"success": False, 
                 "data": None, 
