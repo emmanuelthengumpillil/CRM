@@ -12,8 +12,7 @@ def valid_row_data(row_dict):
         "error" : None}
 
 
-def validate_keys(file, row_dict):
-    header = file["header"]
+def validate_keys(header, row_dict):
     if header == None:
         return {"success": False, 
             "data": None, 
@@ -38,9 +37,9 @@ def validate_not_empty(row_dict):
         "error" : None}
 
 
-def validate_row(file,row_dict):
+def validate_row(header,row_dict):
     if valid_row_data(row_dict)["success"]:
-        if validate_keys(file, row_dict)["success"]:
+        if validate_keys(header, row_dict)["success"]:
             if validate_not_empty(row_dict)["success"]:
                 return {"success": True, 
                     "data": row_dict, 
