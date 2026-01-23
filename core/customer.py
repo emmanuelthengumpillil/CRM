@@ -32,7 +32,7 @@ def create_row_dict(list_file, header, name, phone):
         if result_id["success"]:
             values = [result_id["data"], name, phone]
             row_dict = dict(zip(header, values))
-            if valid.validate_row(list_file, row_dict)["success"]:
+            if valid.validate_row(header, row_dict)["success"]:
                 return {"success": True, 
                     "data": row_dict, 
                     "error" : None}

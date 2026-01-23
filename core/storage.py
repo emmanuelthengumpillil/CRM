@@ -1,6 +1,8 @@
 import csv
 
 
+# Takes FILE_NAME
+## Returns the {FILE DICT}
 def read_csv(file):
     crm_list = []
     try:
@@ -27,6 +29,7 @@ def read_csv(file):
         raise UnicodeEncodeError(e)
 
 
+# Takes {RETURN DICT}, ROW_TO_WRITE
 def write_csv(file, row):
     header = file["header"]
     file_name = file["file_name"]
@@ -45,6 +48,7 @@ def write_csv(file, row):
         raise UnicodeEncodeError(e)
 
 
+# Takes {OLD_HEADER, NEW_FILE_NAME, New_ROW}
 def rewrite_csv(old_header, new_file, new_row):
     with open(new_file, "w", newline='') as write_file:
         writer = csv.DictWriter(write_file, fieldnames=old_header)
@@ -56,7 +60,7 @@ def rewrite_csv(old_header, new_file, new_row):
             "error" : None}
 
 
-
+# Takes {RETURN DICT_OLD_HEADER, NEW_FILE_NAME}
 def duplicate_csv(old_file,new_file):
     old_header = old_file["header"]
     with open(new_file, "w", newline="") as write_file:

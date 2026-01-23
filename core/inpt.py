@@ -1,6 +1,8 @@
 import valid
 import sys
 
+
+# Gets name as a {Return Dict}
 def get_name():
     while True:
         try:
@@ -15,6 +17,7 @@ def get_name():
                 "error" : "\nGet name gone wrong"}
 
 
+# Gets phone no as a {Return Dict}
 def get_phone():
     while True:
         try:
@@ -29,6 +32,7 @@ def get_phone():
                 "error" : "\nGet phone gone wrong"}
 
 
+# Gets id as a {Return Dict}
 def get_id():
     while True:
         try:
@@ -43,6 +47,7 @@ def get_id():
                 "error" : "\nGet id gone wrong"}
 
 
+# Gets input as a {Return Dict}
 def get_input():
     name = get_name()["data"]
     phone = get_phone()["data"]
@@ -56,6 +61,7 @@ def get_input():
         "error" : "Get input gone wrong"}
 
 
+# Gets choice as a {Return Dict}
 def get_choice():
     while True:
         try:
@@ -76,6 +82,7 @@ def get_choice():
             print("-- Please enter among the following choices --")
 
 
+# Gets file_name as a {Return Dict}
 def get_file():
     while True:
         try:
