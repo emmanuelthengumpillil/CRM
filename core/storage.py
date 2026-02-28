@@ -66,6 +66,6 @@ def duplicate_csv(old_file,new_file):
     with open(new_file, "w", newline="") as write_file:
         writer = csv.DictWriter(write_file, fieldnames = old_header)
         writer.writeheader()
-        for i in old_file["data"]:
-            writer.writerow(i)
+        for row in old_file["data"]:
+            writer.writerow(row)
 
